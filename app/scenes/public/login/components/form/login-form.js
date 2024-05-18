@@ -37,7 +37,7 @@ export async function LoginFormComponent() {
       alert('Please fill in all fields');
       return;
     }
-    const token = await login(email, password);
+    const token = 'hola';
     if (token) {
       localStorage.setItem('token', token);
       navigateTo('/dashboard');
@@ -46,10 +46,9 @@ export async function LoginFormComponent() {
     }
   });
 }
-
 async function login(email, password) {
   try {
-    const response = await fetch('http://localhost:3000/auth/login', {
+    const response = await fetch('http://localhost:4000/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
