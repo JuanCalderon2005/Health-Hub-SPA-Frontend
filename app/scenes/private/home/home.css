@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(5,1fr) ;
     grid-template-rows: repeat(4,1fr);
-    height: 100vh;
+    height: 93vh;
     gap: 20px /* Ocupa toda la altura de la pantalla */
   }
   
@@ -32,4 +32,3 @@
   .container2 {
     background-color: lightgreen;
   }
-  

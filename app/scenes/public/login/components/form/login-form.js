@@ -16,7 +16,7 @@ export async function LoginFormComponent() {
     <div class="${style.container2}">
         <div class="${style.form1}">
             <form class="${style.form}" method="post" id="loginForm">
-                <input class="${style.input}" type="text" name="email" placeholder="john@doe.com" id="email">
+                <input class="${style.input}" type="email" name="email" placeholder="john@doe.com" id="email">
                 <input class="${style.input}" type="password" name="password" placeholder="********" id="password">
                 <input class="${style.input}" type="submit" name="login" value="Login">
                 <a href="#" class="${style.google}">Login with Google</a>

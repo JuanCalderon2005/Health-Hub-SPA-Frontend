@@ -14,8 +14,7 @@ export function SidebarMenu(data = []) {
 
   return `
     <aside class="${styles["sidebar-menu"]}">
-      <ul>
-        <i class="bi bi-house"></i> <!-- Usar la clase de Bootstrap Icons -->
+      <ul class="${styles["ul"]}">
         ${data.map((item) => `
           <li class="${item.active ? styles.active : ''}">
             <button id="${item.href}" type="button">${item.name}</button>

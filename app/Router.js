@@ -45,7 +45,7 @@ async function checkAuth(path) {
     if (isValid) {
       // Redirigir al dashboard si se intenta acceder al login o a la raíz
       if (path === '/login' || path === '/') {
-        navigateTo('/dashboard');
+        navigateTo('/login');
         return;
       }
 
@@ -56,7 +56,7 @@ async function checkAuth(path) {
         DashboardLayout(pageContent, logic)
         return;
       } else {
-        navigateTo('/dashboard'); // Redirigir a dashboard si la ruta privada no existe
+        navigateTo('/login'); // Redirigir a dashboard si la ruta privada no existe
       }
     } else {
       // Token no válido, redirigir a login
@@ -79,7 +79,7 @@ export async function Router() {
     if (token) {
       const [isValid] = await verifyToken(token);
       if (isValid) {
-        navigateTo('/dashboard');
+        navigateTo('/dashboard/home');
         return;
       }
     }

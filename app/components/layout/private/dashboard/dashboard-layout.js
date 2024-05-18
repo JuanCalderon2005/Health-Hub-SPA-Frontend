@@ -9,7 +9,7 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
   const root = document.getElementById('root');
 
   sidebarData = [
-    {href: '/dashboard/welcomePhysician', name: 'Home'}
+    {href: '/dashboard', name: 'Home'}
   ];
 
   navbarData = {
