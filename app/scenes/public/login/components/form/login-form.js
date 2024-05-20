@@ -1,5 +1,6 @@
 import { navigateTo } from '../../../../../Router.js';
 import { formValidator } from '../../../../../helpers';
+import 'boxicons';
 import style from './login-form.css';
 
 export async function LoginFormComponent() {
@@ -18,22 +19,30 @@ export async function LoginFormComponent() {
             <form class="${style.form}" method="post" id="loginForm">
                 <input class="${style.input}" type="email" name="email" placeholder="john@doe.com" id="email">
                 <input class="${style.input}" type="password" name="password" placeholder="********" id="password">
-                <input class="${style.input}" type="submit" name="login" value="Login">
-                <a href="#" class="${style.google}">Login with Google</a>
+                <input class="${style.buttonLogin}" type="submit" name="login" value="Login">
+                <div class="${style.cont}">
+                  <button id="login-with-google" class="${style.button}" type="button">Google</button>
+                  <button id="/register" class="${style.button}" type="button">New Account</button>
+                </div>
                 <a href="#" class="${style.forpass}">Forgot password?</a>
             </form>
         </div>
     </div>
   </div>
 `;
-  
+
+  const newRegister = document.getElementById('/register');
+  newRegister.addEventListener('click', () => {
+    navigateTo('/register');
+  });
+
   const form = document.getElementById('loginForm');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    if(!formValidator(email, password)){
+    if (!formValidator(email, password)) {
       alert('Please fill in all fields');
       return;
     }
@@ -46,6 +55,7 @@ export async function LoginFormComponent() {
     }
   });
 }
+
 async function login(email, password) {
   try {
     const response = await fetch('http://localhost:4000/api/auth/login', {

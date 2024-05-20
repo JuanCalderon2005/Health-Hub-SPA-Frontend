@@ -1,4 +1,5 @@
 import styles from './navigation-bar.css';
+import 'boxicons';
 
 export function NavigationBar(
   { user, userImage } =
@@ -8,6 +9,7 @@ export function NavigationBar(
   return `
   <div class="${styles.container}">
     <p>${user}</p>
+    <box-icon name='user'></box-icon>
     <img src="${userImage}" alt="User image">
   </div>
   `;
