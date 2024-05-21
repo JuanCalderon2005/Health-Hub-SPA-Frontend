@@ -16,9 +16,7 @@ export function SidebarMenu(data = []) {
       <ul class="${styles["ul"]}">
         ${data.map((item) => `
           <li class="${item.active ? styles.active : ''}">
-            <button id="${item.href}" type="button">
-              <box-icon name='home-alt-2' color="#FFF" class="${styles.iconos}"></box-icon>
-            </button>
+            <button id="${item.href}" type="button">${item.name}</button>
           </li>
         `).join('')}
         <li><button id="logout" type="button"><box-icon name='log-in' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>

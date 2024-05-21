@@ -3,6 +3,8 @@ import { logOut } from "../../../../helpers";
 import { NavigationBar } from "../../../navigation-bar/navigation-bar";
 import { SidebarMenu } from "../../../sidebar-menu/sidebar-menu";
 import styles from './dashboard-layout.css';
+import 'boxicons'
+
 
 export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
 
@@ -10,7 +12,7 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
 
   sidebarData = [
     {href: '/dashboard', name: 'Home'},
-    {href: '/dashboard/forms', name: 'Forms'},
+    {href: '/dashboard/forms', name: 'Add'},
     
   ];
 
