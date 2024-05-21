@@ -16,7 +16,7 @@ export function SidebarMenu(data = []) {
             </li>
           `;
         }).join('')}
-        <li><button id="logout" type="button"><box-icon name='log-in' color="#FFF" class="${styles.iconos}" ></box-icon> </button></li>
+        <li><button id="logout" type="button"><box-icon name='log-in' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>
       </ul>
     </aside>
   `;
