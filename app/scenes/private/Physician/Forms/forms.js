@@ -1,10 +1,12 @@
 import styles from './forms.css';
 export function createForms() {
     const pageContent = `
+    <section  class="${styles.contenedor}">
     <select class="${styles.indical}">
         <option class="${styles.options}" value="tip">Tips</option>
         <option class="${styles.options}" value="routine">Routines</option>
     </select> 
+    </section>
     <div id="content"></div>
     `;
 

@@ -48,3 +48,7 @@ aside.sidebar-menu > ul > li:hover {
     width: 35px;
     height: 35px;
 }
+
+.iconWhite{
+    color: turquoise;
+}

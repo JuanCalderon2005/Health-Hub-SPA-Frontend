@@ -28,3 +28,9 @@
     grid-area: main;
     padding: var(--spacing-3);
 }
+
+.icon-white {
+    color: #e21212; /* Establece el color blanco */
+    /* Otros estilos si es necesario */
+  }
+  
