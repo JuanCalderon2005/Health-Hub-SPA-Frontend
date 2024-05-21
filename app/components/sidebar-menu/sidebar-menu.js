@@ -1,6 +1,5 @@
 import styles from './sidebar-menu.css';
-import 'bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Importar el CSS de Bootstrap Icons
+import 'boxicons';
 
 export function SidebarMenu(data = []) {
   const path = window.location.pathname;
@@ -17,10 +16,14 @@ export function SidebarMenu(data = []) {
       <ul class="${styles["ul"]}">
         ${data.map((item) => `
           <li class="${item.active ? styles.active : ''}">
-            <button id="${item.href}" type="button">${item.name}</button>
+            <button id="${item.href}" type="button">
+              <box-icon name='home-alt-2' color="#FFF" class="${styles.iconos}"></box-icon>
+            </button>
+             <li><button id="add" type="button"><box-icon name='plus' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>
           </li>
         `).join('')}
-        <li><button id="logout" type="button">Logout</button></li>
+      
+        <li><button id="logout" type="button"><box-icon name='log-in' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>
       </ul>
     </aside>
   `;

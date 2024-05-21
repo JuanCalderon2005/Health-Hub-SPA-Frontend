@@ -50,7 +50,7 @@ h2{
 }
 
 .input {
-    width: 100%;
+    width: 90%;
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -60,7 +60,7 @@ h2{
 .forpass {
     text-decoration: none;
     color: black;
-    margin-left: 50%;
+    margin-left: 70%;
     font-size: 12px;
 } 
 
@@ -82,10 +82,10 @@ a.google{
 
 
 .cont{
-    width: 300px;
+    width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 10px;
     margin-top: 50px;
 }
@@ -100,10 +100,12 @@ a.google{
 }
 
 .buttonLogin {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border: none;
     border-radius: 10px;
     color: black;
     background-color: white;
 }
+
+
