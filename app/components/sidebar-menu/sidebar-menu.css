@@ -1,7 +1,7 @@
 aside.sidebar-menu {
     background-color: black;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
     height: 100%;
+    width: 50%;
 }
 
 aside.sidebar-menu .bx {
@@ -12,6 +12,7 @@ aside.sidebar-menu > ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+   
     height: 100%;
     gap: var(--spacing-1);
     padding: 40px;
@@ -45,10 +46,9 @@ aside.sidebar-menu > ul > li:hover {
 
 .iconos {
     color: white;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px; 
+    position: relative;
+    top: 450px;
 }
 
-.iconWhite{
-    color: turquoise;
-}

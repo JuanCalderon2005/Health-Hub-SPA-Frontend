@@ -5,9 +5,9 @@
 }
 .container {
     display: grid;
-    grid-template-areas: "sidebar navbar"
-        "sidebar main";
+    grid-template-areas: "sidebar navbar" "sidebar main";
     grid-template-columns: minmax(var(--sidebar-width), auto) 1fr;
+
     grid-auto-rows: var(--navbar-height) 1fr;
     height: auto;
     background-color: #E5E8E8;
@@ -15,7 +15,6 @@
 
 .sidebar {
     grid-area: sidebar;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
 }
 
@@ -29,8 +28,5 @@
     padding: var(--spacing-3);
 }
 
-.icon-white {
-    color: #e21212; /* Establece el color blanco */
-    /* Otros estilos si es necesario */
-  }
+
   

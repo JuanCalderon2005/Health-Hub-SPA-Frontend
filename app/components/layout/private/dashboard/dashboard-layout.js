@@ -11,8 +11,8 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
 
   const root = document.getElementById('root');
   sidebarData = [
-    { href: '/dashboard', icon: `<box-icon name="home-alt-2" color="#FFF" ></box-icon>` },
-    { href: '/dashboard/forms', icon: `<box-icon name="plus" color="#FFF"></box-icon>` },
+    { href: '/dashboard', icon: `<box-icon name='home-alt' color="#FFF"></box-icon>` },
+    { href: '/dashboard/forms', icon: `<box-icon type='solid' name='plus-circle' color="#FFF"></box-icon>` },
   ];
   
   navbarData = {
