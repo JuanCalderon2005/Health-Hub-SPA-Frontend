@@ -19,10 +19,8 @@ export function SidebarMenu(data = []) {
             <button id="${item.href}" type="button">
               <box-icon name='home-alt-2' color="#FFF" class="${styles.iconos}"></box-icon>
             </button>
-             <li><button id="add" type="button"><box-icon name='plus' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>
           </li>
         `).join('')}
-      
         <li><button id="logout" type="button"><box-icon name='log-in' color="#FFF" class="${styles.iconos}"></box-icon> </button></li>
       </ul>
     </aside>
