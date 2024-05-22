@@ -78,3 +78,24 @@
   background-color: rgb(255, 255, 255);
 }
 
+.routineDialogContainer{
+  position: fixed;
+  top: 25%;
+  left: 35%;
+  border: none;
+  border-radius: 18px;
+}
+
+.tipDialogContainer{
+  position: fixed;
+  top: 25%;
+  left: 35%;
+  border: none;
+  border-radius: 18px;
+}
+
+.contBottom{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

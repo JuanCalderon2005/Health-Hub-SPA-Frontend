@@ -4,12 +4,16 @@ export function HomeScene() {
   const pageContent = `
     <section class="${styles['grid-container']}">
       <div class="${styles['left-container']}">
-        <button type="button" id="updateRoutine" class="${styles.newTip}">Agregar Rutina</button>
+        <div class="${styles.contBottom}">
+          <button type="button" id="updateRoutine" class="${styles.newTip}">Agregar Rutina</button>
+        </div>
         <div id="routineList" class="${styles['list-container']}"></div>
       </div>
 
       <div class="${styles['other-container']}">
+        <div class="${styles.contBottom}">
         <button type="button" id="updateTip" class="${styles.newTip}">Agregar Tip</button>
+        </div>
         <div id="tipList" class="${styles['list-container']}"></div>
       </div>
 
