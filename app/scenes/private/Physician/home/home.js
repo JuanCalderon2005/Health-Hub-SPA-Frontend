@@ -1,5 +1,5 @@
 import styles from './home.css';
-import 'boxicons'
+import 'boxicons';
 
 export function HomeScene() {
   const pageContent = `
@@ -17,28 +17,24 @@ export function HomeScene() {
         </div>
         <div id="tipList" class="${styles['list-container']}"></div>
       </div>
-
-      <div class="${styles['right-container']}">
-      <div class="${styles['create-post-container']}">
-        <div class="${styles['create-post-header']}">
-          <p class="${styles['text']}">Create post</p>
-        
+      <div class=${styles['right-container']}>
+      <div class=${styles['create-post-container']}>
+        <div class=${styles['create-post-header']}>
+          <p class=${styles['text']}>Create post</p>
         </div>
-        <div class="${styles['create-post-body']}">
-          <div class="${styles['input-container']}>
-            <span class="$input-icon">💬</span>
-            <input type="text" placeholder="Write message" />
-            <button class="${styles['boton-send']}">Send</button>
+        <div class=${styles['create-post-body']}>
+          <div class=${styles['input-container']}>
+            <span class=${styles['input-icon']}>💬</span>
+            <input id="messageInput" type="text" placeholder="Write message" />
+            <button class=${styles['boton-send']} onclick="displayMessage()">Send</button>
           </div>
+          <div id="displayMessageArea"></div>
         </div>
       </div>
     </div>
-    
-
-
     </section>
 
-    <dialog id="routineDialog" class="${styles.routineDialogContainer}"
+    <dialog id="routineDialog" class="${styles.routineDialogContainer}">
       <form method="dialog" class="${styles.foms}">
         <section class="${styles['dialog-content']}">
           <h1>Crear Rutina</h1>
@@ -81,6 +77,26 @@ export function HomeScene() {
     const cancelTipButton = document.getElementById("cancelTip");
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
+
+    window.displayMessage = function() {
+      var message = document.getElementById('messageInput').value;
+      
+      if (message.trim() === "") {
+        alert("Please enter a message.");
+        return;
+      }
+    
+      // Crear un nuevo elemento para el mensaje
+      var newMessageElement = document.createElement('div');
+      newMessageElement.className = styles['message-item'];
+      newMessageElement.innerText = message;
+    
+      // Agregar el nuevo elemento al área de mensajes
+      document.getElementById('displayMessageArea').appendChild(newMessageElement);
+    
+      // Limpiar el input
+      document.getElementById('messageInput').value = "";
+    };
 
     updateRoutineButton.addEventListener("click", () => {
       routineDialog.showModal();
@@ -126,5 +142,3 @@ export function HomeScene() {
     logic
   };
 }
-
-

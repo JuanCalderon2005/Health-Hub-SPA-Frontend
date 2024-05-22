@@ -80,7 +80,7 @@
   border-radius: 10px;
   padding: 4px;
   position: relative;
-  left: 250px;
+  left: 200px;
 
 }
 
@@ -89,6 +89,12 @@
 
 }
 
+.message-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
 
 
 /* fin de los estilos del foro */
