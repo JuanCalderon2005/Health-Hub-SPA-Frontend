@@ -19,6 +19,7 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
     user: 'Helth-hub',
     userImage: 'https://randomuser.me/api/portraits/men/75.jpg',
   };
+  const { html: htmlNavigationBar, logic: logicNavigationBar } = NavigationBar(navbarData)
 
   root.innerHTML = `
   <div class="${styles.container}">
@@ -26,7 +27,7 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
       ${SidebarMenu(sidebarData)}
     </div>
     <div class="${styles.navbar}">
-      ${NavigationBar(navbarData)}
+      ${htmlNavigationBar}
     </div>
     <div class="${styles.main}">
       ${pageContent}
@@ -35,6 +36,7 @@ export function DashboardLayout(pageContent, logic, navbarData, sidebarData,) {
   `;
 
   logic();
+  logicNavigationBar();
 
   sidebarData.forEach(({ href, icon, label }) => {
     document.getElementById(href).addEventListener('click', () => {

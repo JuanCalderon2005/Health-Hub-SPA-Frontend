@@ -68,7 +68,7 @@
   border-radius: 5px;
 }
 
-.forms{
+.forms {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,23 +78,25 @@
   background-color: rgb(255, 255, 255);
 }
 
-.routineDialogContainer{
+.routineDialogContainer {
   position: fixed;
-  top: 25%;
-  left: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: none;
   border-radius: 18px;
 }
 
-.tipDialogContainer{
+.tipDialogContainer {
   position: fixed;
-  top: 25%;
-  left: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: none;
   border-radius: 18px;
 }
 
-.contBottom{
+.contBottom {
   width: 100%;
   display: flex;
   justify-content: flex-end;
