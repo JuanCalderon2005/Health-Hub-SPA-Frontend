@@ -1,4 +1,5 @@
 import styles from './home.css';
+import 'boxicons'
 
 export function HomeScene() {
   const pageContent = `
@@ -17,7 +18,24 @@ export function HomeScene() {
         <div id="tipList" class="${styles['list-container']}"></div>
       </div>
 
-      <div class="${styles['right-container']}"></div>
+      <div class="${styles['right-container']}">
+      <div class="${styles['create-post-container']}">
+        <div class="${styles['create-post-header']}">
+          <p class="${styles['text']}">Create post</p>
+        
+        </div>
+        <div class="${styles['create-post-body']}">
+          <div class="${styles['input-container']}>
+            <span class="$input-icon">💬</span>
+            <input type="text" placeholder="Write message" />
+            <button class="${styles['boton-send']}">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
     </section>
 
     <dialog id="routineDialog" class="${styles.routineDialogContainer}"

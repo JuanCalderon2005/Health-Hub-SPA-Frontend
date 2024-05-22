@@ -24,6 +24,75 @@
 
 }
 
+/* estilos del foro */
+.create-post-container {
+  background-color: #dae7cf;
+  border-radius: 8px;
+  padding: 16px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+
+
+
+}
+
+.input-container input {
+  margin-left: 10px;
+
+/* Adjust as needed */
+}
+
+.publish-button {
+ position: relative;
+ bottom: 40px;
+}
+
+.text{
+  color: rgb(163, 163, 180);
+  position: relative;
+  bottom: 15px;
+}
+
+.create-post-body{
+  display: flex;
+  flex-direction: row;
+
+ 
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
+.boton-send{
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 4px;
+  position: relative;
+  left: 250px;
+
+}
+
+.boton-send:hover{ 
+  background-color: rgb(205, 255, 215);
+
+}
+
+
+
+/* fin de los estilos del foro */
+
 .other-container {
   background-color: rgb(255, 254, 254);
   border-radius: 15px;
