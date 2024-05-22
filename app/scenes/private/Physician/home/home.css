@@ -187,7 +187,7 @@
   margin-top: 5px;
   padding: 5px 10px;
   border: none;
-  background-color: #007bff;
+  background-color: #81b1d1;
   color: white;
   border-radius: 4px;
   cursor: pointer;
@@ -215,4 +215,9 @@
   font-size: 1em;
   cursor: pointer;
   color: red;
+}
+
+.messageArea {
+  max-height: 100%; /* Ajusta esto según tus necesidades */
+  overflow-y: auto;
 }
