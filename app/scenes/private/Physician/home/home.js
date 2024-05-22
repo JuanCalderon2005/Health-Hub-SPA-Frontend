@@ -25,12 +25,16 @@ export function HomeScene() {
         <div class=${styles['create-post-body']}>
           <div class=${styles['input-container']}>
             <span class=${styles['input-icon']}>💬</span>
-            <input id="messageInput" type="text" placeholder="Write message" />
+            <input class="${styles.texForo}" id="messageInput" type="text" placeholder="Write message" />
             <button class=${styles['boton-send']} onclick="displayMessage()">Send</button>
           </div>
-          <div id="displayMessageArea"></div>
-        </div>
-      </div>
+          <div id="replyContainer" class="${styles['reply-container']}" style="display: none;">
+            Respondiendo a: <span id="replyTo" class="${styles['reply-text']}"></span>
+            <button class="${styles['cancel-reply']}" onclick="cancelReply()">X</button>
+          </div>
+          </div>
+          <div class="${styles['messageArea']}" id="displayMessageArea">
+          </div>
     </div>
     </section>
 
@@ -79,23 +83,57 @@ export function HomeScene() {
     const tipList = document.getElementById("tipList");
 
     window.displayMessage = function() {
-      var message = document.getElementById('messageInput').value;
-      
+      const message = document.getElementById('messageInput').value;
+      const replyTo = document.getElementById('replyTo').innerText;
+
       if (message.trim() === "") {
         alert("Please enter a message.");
         return;
       }
-    
-      // Crear un nuevo elemento para el mensaje
-      var newMessageElement = document.createElement('div');
+
+
+      const newMessageElement = document.createElement('div');
       newMessageElement.className = styles['message-item'];
-      newMessageElement.innerText = message;
-    
-      // Agregar el nuevo elemento al área de mensajes
+
+      let replyHTML = '';
+      if (replyTo) {
+        replyHTML = `
+          <div class="${styles['reply-container']}">
+            <span class="${styles['reply-text']}">${replyTo}</span>
+          </div>
+        `;
+      }
+
+      newMessageElement.innerHTML = `
+        ${replyHTML}
+        <div class="${styles['message-content']}">
+          <div class="${styles['message-header']}">
+          </div>
+          <div class="${styles['message-body']}">${message}</div>
+          <button class="${styles['reply-button']}" onclick="replyToMessage('${message}')">Responder</button>
+        </div>
+      `;
+
       document.getElementById('displayMessageArea').appendChild(newMessageElement);
-    
-      // Limpiar el input
+
       document.getElementById('messageInput').value = "";
+      document.getElementById('replyTo').innerText = "";
+      document.getElementById('replyContainer').style.display = 'none';
+    };
+
+    window.replyToMessage = function(message) {
+      const replyToContainer = document.getElementById('replyContainer');
+      const replyToText = document.getElementById('replyTo');
+      replyToText.innerText = message;
+      replyToContainer.style.display = 'block';
+
+      const messageInput = document.getElementById('messageInput');
+      messageInput.focus();
+    };
+
+    window.cancelReply = function() {
+      document.getElementById('replyTo').innerText = '';
+      document.getElementById('replyContainer').style.display = 'none';
     };
 
     updateRoutineButton.addEventListener("click", () => {

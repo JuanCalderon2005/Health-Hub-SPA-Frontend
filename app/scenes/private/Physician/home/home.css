@@ -21,16 +21,16 @@
   border-radius: 15px;
   grid-column: 4/-1;
   grid-row: -5/-1;
-
+  display: flex;
+  justify-content: center;
 }
 
-/* estilos del foro */
 .create-post-container {
   background-color: #dae7cf;
   border-radius: 8px;
   padding: 16px;
   width: 90%;
-  margin: auto;
+  margin: 12px;
   display: flex;
   flex-direction: column;
 }
@@ -43,48 +43,56 @@
 
 .input-container {
   display: flex;
-
-
-
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .input-container input {
   margin-left: 10px;
-
-/* Adjust as needed */
+  display: flex;
+  justify-content: space-around;
 }
 
 .publish-button {
- position: relative;
- bottom: 40px;
+  position: relative;
+  bottom: 40px;
 }
 
-.text{
+.texForo{
+  width: 50%;
+  text-decoration: none;
+  border:0.5px solid black;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+.text {
   color: rgb(163, 163, 180);
   position: relative;
   bottom: 15px;
 }
 
-.create-post-body{
+.create-post-body {
   display: flex;
-  flex-direction: row;
-
- 
+  width: auto;
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
 }
 
-.boton-send{
+.boton-send {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  padding: 4px;
-  position: relative;
-  left: 200px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid black;
 
 }
 
-.boton-send:hover{ 
+.boton-send:hover {
   background-color: rgb(205, 255, 215);
 
 }
@@ -96,8 +104,6 @@
   border-radius: 5px;
 }
 
-
-/* fin de los estilos del foro */
 
 .other-container {
   background-color: rgb(255, 254, 254);
@@ -175,4 +181,38 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.reply-button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.reply-button:hover {
+  background-color: #0056b3;
+}
+
+.reply-container {
+  background-color: #f1f1f1;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.reply-text {
+  font-style: italic;
+}
+
+.cancel-reply {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: red;
 }
