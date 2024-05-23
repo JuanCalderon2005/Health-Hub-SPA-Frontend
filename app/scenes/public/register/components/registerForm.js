@@ -18,7 +18,7 @@ export async function RegisterFormComponent() {
             </div>
         </div>
     </div>
-    <!-- Patient's register form -->
+
 
     <dialog id="patientInfo" class="${style.patientContainer}">
         <form id="patientForm" class="${style.form}">
@@ -27,6 +27,8 @@ export async function RegisterFormComponent() {
                 <input type="email" id="patientEmail" placeholder="Email" class="${style.input}">
                 <input type="password" id="patientPassword" placeholder="Password" class="${style.input}">
                 <input type="password" id="patientConfirmPassword" placeholder="Confirm Password" class="${style.input}">
+                <input type="password" id="patientConfirmPassword" placeholder="Confirm Password" class="${style.input}">
+                
             </section>
             <section class="${style.patientButtons}">
                 <button type="button" id="registerPacient" class="${style.button}">Register</button>
