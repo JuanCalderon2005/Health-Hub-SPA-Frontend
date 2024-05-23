@@ -27,8 +27,6 @@ export async function RegisterFormComponent() {
                 <input type="email" id="patientEmail" placeholder="Email" class="${style.input}">
                 <input type="password" id="patientPassword" placeholder="Password" class="${style.input}">
                 <input type="password" id="patientConfirmPassword" placeholder="Confirm Password" class="${style.input}">
-                <input type="password" id="patientConfirmPassword" placeholder="Confirm Password" class="${style.input}">
-                
             </section>
             <section class="${style.patientButtons}">
                 <button type="button" id="registerPacient" class="${style.button}">Register</button>
@@ -50,7 +48,7 @@ export async function RegisterFormComponent() {
             <section class="${style.physicianButtons}">
             <button type="button" id="registerDoctor" class="${style.button}">Register</button>
             <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
-                <a href="#" class="${style.google}">Register with Google</a>
+                <a href="#" class="${style.google}">Register with Google</a>a
             </section>
         </form>
     </dialog>
