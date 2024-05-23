@@ -48,7 +48,7 @@ export async function RegisterFormComponent() {
             <section class="${style.physicianButtons}">
             <button type="button" id="registerDoctor" class="${style.button}">Register</button>
             <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
-                <a href="#" class="${style.google}">Register with Google</a>
+                <a href="#" class="${style.google}">Register with Google</a>a
             </section>
         </form>
     </dialog>
