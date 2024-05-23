@@ -1,11 +1,11 @@
 import { navigateTo } from "../../../../Router";
 import { formValidator } from "../../../../helpers";
-import style from './registerForm.css';
+import style from "./registerForm.css";
 
 export async function RegisterFormComponent() {
-    const d = document;
-    const root = d.getElementById('root');
-    root.innerHTML = `
+  const d = document;
+  const root = d.getElementById("root");
+  root.innerHTML = `
     <div class="${style.body}">
         <div class="${style.container1}">
             <div class="${style.container2}">
@@ -21,26 +21,15 @@ export async function RegisterFormComponent() {
     <!-- Patient's register form -->
 
     <dialog id="patientInfo" class="${style.patientContainer}">
-        <form method="dialog" class="${style.form}">
+        <form id="patientForm" class="${style.form}">
             <section class="${style.patientInfo}">
                 <input type="text" id="patientName" placeholder="Name" class="${style.input}">
                 <input type="email" id="patientEmail" placeholder="Email" class="${style.input}">
                 <input type="password" id="patientPassword" placeholder="Password" class="${style.input}">
                 <input type="password" id="patientConfirmPassword" placeholder="Confirm Password" class="${style.input}">
             </section>
-            <section class="${style.physicianData}">
-                <label for="weight">Enter your weight</label>
-                <input type="number" id="weight" name="weight" required>
-                <label for="height">Enter your height</label>
-                <input type="number" id="height" name="height" required>
-                <label for="age">Enter your age</label>
-                <input type="number" id="age" name="age" required>
-                <label><input type="radio" name="sex" value="male" required>Male</label>
-                <label><input type="radio" name="sex" value="female" required>Female</label>
-            </section>
-            <section class="${style.physicianButtons}">
-                <input type="hidden" id="patientId" name="patientId">
-                <input type="submit" value="Register" class="${style.button}">
+            <section class="${style.patientButtons}">
+                <button type="button" id="registerPacient" class="${style.button}">Register</button>
                 <button type="button" id="closePatientInfo" class="${style.button}">Close</button>
                 <a href="#" class="${style.google}">Register with Google</a>
             </section>
@@ -49,15 +38,14 @@ export async function RegisterFormComponent() {
     <!-- Physician's register form -->
 
     <dialog id="physicianInfo" class="${style.physicianContainer}">
-        <form method="dialog" class="${style.form}">
+        <form id="physicianForm" class="${style.form}">
             <section class="${style.physicianInfo}">
                 <input type="text" id="physicianName" placeholder="Name" class="${style.input}">
                 <input type="email" id="physicianEmail" placeholder="Email" class="${style.input}">
                 <input type="password" id="physicianPassword" placeholder="Password" class="${style.input}">
                 <input type="password" id="physicianConfirmPassword" placeholder="Confirm Password" class="${style.input}">
             </section>
-            <section class="${style.patientButtons}">
-                <input type="hidden" id="physicianId" name="physicianId">
+            <section class="${style.physicianButtons}">
                 <input type="submit" value="Register" class="${style.button}">
                 <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
                 <a href="#" class="${style.google}">Register with Google</a>
@@ -66,76 +54,87 @@ export async function RegisterFormComponent() {
     </dialog>
     `;
 
-    // Const from the patient
-    const registerPatient = d.getElementById(' ');
-    const patientInfo = d.getElementById('patientInfo');
-    const closePatientInfo = d.getElementById('closePatientInfo');
+  const registerPatient = d.getElementById("registerPatient");
+  const patientInfo = d.getElementById("patientInfo");
+  const closePatientInfo = d.getElementById("closePatientInfo");
+  const registerP = d.getElementById("registerPacient");
 
-    // Const from the physician
-    const registerPhysician = d.getElementById('registerPhysician');
-    const physicianInfo = d.getElementById('physicianInfo');
-    const closePhysicianInfo = d.getElementById('closePhysicianInfo');
+  const registerPhysician = d.getElementById("registerPhysician");
+  const physicianInfo = d.getElementById("physicianInfo");
+  const closePhysicianInfo = d.getElementById("closePhysicianInfo");
 
-    registerPatient.addEventListener("click", () => {
-        patientInfo.showModal();
-    });
+  registerPatient.addEventListener("click", () => {
+    patientInfo.showModal();
+  });
 
-    closePatientInfo.addEventListener("click", () => {
-        patientInfo.close();
-    });
+  closePatientInfo.addEventListener("click", () => {
+    patientInfo.close();
+  });
 
-    registerPhysician.addEventListener("click", () => {
-        physicianInfo.showModal();
-    });
+  registerPhysician.addEventListener("click", () => {
+    physicianInfo.showModal();
+  });
 
-    closePhysicianInfo.addEventListener("click", () => {
-        physicianInfo.close();
-    });
+  closePhysicianInfo.addEventListener("click", () => {
+    physicianInfo.close();
+  });
 
-    const registerForm = d.getElementById('registerForm');
-    if (registerForm) {
-        registerForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+  registerP.addEventListener("click", () => {
+    navigateTo('/dashboard/home')
+  })
 
-            const name = d.getElementById('name').value;
-            const email = d.getElementById('email').value;
-            const password = d.getElementById('password').value;
-            const confirmPassword = d.getElementById('confirmPassword').value;
 
-            if (!formValidator(name, email, password, confirmPassword)) {
-                alert('Please fill in all fields correctly');
-                return;
-            }
+  const patientForm = d.getElementById("patientForm");
+  const physicianForm = d.getElementById("physicianForm");
 
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
-            try {
-                const response = await fetch('https://your-api-url.com/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, password })
-                });
+  if (patientForm && physicianForm) {
+    patientForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-                const data = await response.json();
+      const patientName = d.getElementById("patientName").value;
+      const patientEmail = d.getElementById("patientEmail").value;
+      const patientPassword = d.getElementById("patientPassword").value;
+      const patientConfirmPassword = d.getElementById("patientConfirmPassword").value;
 
-                if (data.exists) {
-                    alert('User already exists');
-                } else if (data.success) {
-                    localStorage.setItem('token', data.token);
-                    navigateTo('/dashboard');
-                } else {
-                    alert('Registration failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again later.');
-            }
+      if (!formValidator(patientName, patientEmail, patientPassword, patientConfirmPassword)) {
+        alert("Please fill in all fields correctly");
+        return;
+      }
+
+      if (patientPassword !== patientConfirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      try {
+        const response = await fetch("https://your-api-url.com/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: patientName, email: patientEmail, password: patientPassword }),
         });
-    } else {
-        console.error('registerForm element not found in the DOM');
-    }
+
+        const data = await response.json();
+
+        if (data.exists) {
+          alert("User already exists");
+        } else if (data.success) {
+          localStorage.setItem("token", data.token);
+          navigateTo("/dashboard");
+        } else {
+          alert("Registration failed");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again later.");
+      }
+    });
+
+    physicianForm.addEventListener("submit", async (event) => {
+      // Similar logic as above for physician registration form
+    });
+  } else {
+    console.error("Form elements not found in the DOM");
+  }
 }
