@@ -35,7 +35,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i, // Expresión regular para identificar los archivos de imágenes
+        test: /\.(png|jpg|gif|mp4|svg)$/, // Expresión regular para identificar los archivos de imágenes
         use: ['file-loader?name=assets/[name].[ext]'] // Loader a utilizar, file-loader, copia los archivos de imágenes al directorio de salida
       }
     ]

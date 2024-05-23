@@ -8,28 +8,27 @@ export async function LoginFormComponent() {
 
   console.log(style);
   root.innerHTML = `
-  
-  <div class="${style.body}">
-    <div class="${style.container1}">
-      <h1 class="tit1">HEALTH-HUB</h1>
-      <h2 class="tit2">Empower your wellness journey</h2>
-    </div>
-    <div class="${style.container2}">
+    <div class="${style.body}">
+      <div class="${style.container1}">
+        <h1 class="tit1">HEALTH-HUB</h1>
+        <h2 class="tit2">Empower your wellness journey</h2>
+      </div>
+      <div class="${style.container2}">
         <div class="${style.form1}">
-            <form class="${style.form}" method="post" id="loginForm">
-                <input class="${style.input}" type="email" name="email" placeholder="john@doe.com" id="email">
-                <input class="${style.input}" type="password" name="password" placeholder="********" id="password">
-                <input class="${style.buttonLogin}" type="submit" name="login" value="Login">
-                <div class="${style.cont}">
-                  <button id="login-with-google" class="${style.button}" type="button">Google</button>
-                  <button id="/register" class="${style.button}" type="button">New Account</button>
-                </div>
-                <a href="#" class="${style.forpass}">Forgot password?</a>
-            </form>
+          <form class="${style.form}" method="post" id="loginForm">
+            <input class="${style.input}" type="email" name="email" placeholder="john@doe.com" id="email">
+            <input class="${style.input}" type="password" name="password" placeholder="********" id="password">
+            <input class="${style.buttonLogin}" type="submit" name="login" value="Login">
+            <div class="${style.cont}">
+              <button id="login-with-google" class="${style.button}" type="button">Google</button>
+              <button id="/register" class="${style.button}" type="button">New Account</button>
+            </div>
+            <a href="#" class="${style.forpass}">Forgot password?</a>
+          </form>
         </div>
+      </div>
     </div>
-  </div>
-`;
+  `;
 
   const newRegister = document.getElementById('/register');
   newRegister.addEventListener('click', () => {
@@ -46,7 +45,9 @@ export async function LoginFormComponent() {
       alert('Please fill in all fields');
       return;
     }
-    const token = 'hola';
+
+    const token = await login(email, password);
+
     if (token) {
       localStorage.setItem('token', token);
       navigateTo('/dashboard');
@@ -58,7 +59,7 @@ export async function LoginFormComponent() {
 
 async function login(email, password) {
   try {
-    const response = await fetch('http://localhost:4000/api/auth/login', {
+    const response = await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,6 +73,7 @@ async function login(email, password) {
     }
 
     const data = await response.json();
+    console.log(`Este es el token: ${data.token}`);
     return data.token;
   } catch (error) {
     console.error('Login failed:', error);

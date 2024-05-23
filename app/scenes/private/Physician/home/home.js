@@ -11,6 +11,8 @@ export function HomeScene() {
         <div id="routineList" class="${styles['list-container']}"></div>
       </div>
 
+      <div id="my-id"></div>
+
       <div class="${styles['other-container']}">
         <div class="${styles.contBottom}">
         <button type="button" id="updateTip" class="${styles.newTip}">Agregar Tip</button>
@@ -71,7 +73,16 @@ export function HomeScene() {
     </dialog>
   `;
 
-  const logic = () => {
+  const logic = async () => {
+
+    const $myContainer = document.getElementById('my-id');
+    const response = await fetch('http://localhost:3000/user'); // Asegúrate de usar HTTP si no tienes SSL configurado
+    const respJson = await response.json();
+    console.log(respJson);
+    // $myContainer.innerHTML = `
+    //   ${respJson.map(todo => `<p>${todo.title}</p><p>${todo.userId}</p><p>${todo.completed}</p>`).join('')}
+    // `
+
     const updateRoutineButton = document.getElementById("updateRoutine");
     const cancelRoutineButton = document.getElementById("cancelRoutine");
     const routineDialog = document.getElementById("routineDialog");
@@ -82,7 +93,7 @@ export function HomeScene() {
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
 
-    window.displayMessage = function() {
+    window.displayMessage = function () {
       const message = document.getElementById('messageInput').value;
       const replyTo = document.getElementById('replyTo').innerText;
 
@@ -98,21 +109,21 @@ export function HomeScene() {
       let replyHTML = '';
       if (replyTo) {
         replyHTML = `
-          <div class="${styles['reply-container']}">
-            <span class="${styles['reply-text']}">${replyTo}</span>
-          </div>
-        `;
+      < div class="${styles['reply-container']}" >
+        <span class="${styles['reply-text']}">${replyTo}</span>
+          </div >
+    `;
       }
 
       newMessageElement.innerHTML = `
         ${replyHTML}
-        <div class="${styles['message-content']}">
-          <div class="${styles['message-header']}">
-          </div>
-          <div class="${styles['message-body']}">${message}</div>
-          <button class="${styles['reply-button']}" onclick="replyToMessage('${message}')">Responder</button>
-        </div>
-      `;
+  <div class="${styles['message-content']}">
+    <div class="${styles['message-header']}">
+    </div>
+    <div class="${styles['message-body']}">${message}</div>
+    <button class="${styles['reply-button']}" onclick="replyToMessage('${message}')">Responder</button>
+  </div>
+  `;
 
       document.getElementById('displayMessageArea').appendChild(newMessageElement);
 
@@ -121,7 +132,7 @@ export function HomeScene() {
       document.getElementById('replyContainer').style.display = 'none';
     };
 
-    window.replyToMessage = function(message) {
+    window.replyToMessage = function (message) {
       const replyToContainer = document.getElementById('replyContainer');
       const replyToText = document.getElementById('replyTo');
       replyToText.innerText = message;
@@ -131,7 +142,7 @@ export function HomeScene() {
       messageInput.focus();
     };
 
-    window.cancelReply = function() {
+    window.cancelReply = function () {
       document.getElementById('replyTo').innerText = '';
       document.getElementById('replyContainer').style.display = 'none';
     };
@@ -150,7 +161,7 @@ export function HomeScene() {
       const routineDuration = document.getElementById('routineDuration').value;
       const routineItem = document.createElement('div');
       routineItem.classList.add(styles['list-item']);
-      routineItem.innerHTML = `<strong>${routineType}</strong> - ${routineDuration} minutos`;
+      routineItem.innerHTML = `< strong > ${routineType}</strong > - ${routineDuration} minutos`;
       routineList.appendChild(routineItem);
       routineDialog.close();
     });
@@ -169,7 +180,7 @@ export function HomeScene() {
       const tipDescription = document.getElementById('tipDescription').value;
       const tipItem = document.createElement('div');
       tipItem.classList.add(styles['list-item']);
-      tipItem.innerHTML = `<strong>${tipType}</strong> - ${tipDescription}`;
+      tipItem.innerHTML = `< strong > ${tipType}</strong > - ${tipDescription} `;
       tipList.appendChild(tipItem);
       tipDialog.close();
     });
