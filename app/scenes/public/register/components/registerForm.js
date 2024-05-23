@@ -46,8 +46,8 @@ export async function RegisterFormComponent() {
                 <input type="password" id="physicianConfirmPassword" placeholder="Confirm Password" class="${style.input}">
             </section>
             <section class="${style.physicianButtons}">
-                <input type="submit" value="Register" class="${style.button}">
-                <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
+            <button type="button" id="registerDoctor" class="${style.button}">Register</button>
+            <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
                 <a href="#" class="${style.google}">Register with Google</a>
             </section>
         </form>
@@ -58,6 +58,7 @@ export async function RegisterFormComponent() {
   const patientInfo = d.getElementById("patientInfo");
   const closePatientInfo = d.getElementById("closePatientInfo");
   const registerP = d.getElementById("registerPacient");
+  const registerD = d.getElementById("registerDoctor");
 
   const registerPhysician = d.getElementById("registerPhysician");
   const physicianInfo = d.getElementById("physicianInfo");
@@ -80,6 +81,10 @@ export async function RegisterFormComponent() {
   });
 
   registerP.addEventListener("click", () => {
+    navigateTo('/dashboard/home')
+  })
+
+  registerD.addEventListener("click", () => {
     navigateTo('/dashboard/home')
   })
 
