@@ -1,70 +1,152 @@
-.body{  
-    font-family: 'Satoshi', sans-serif;
+
+.container1 {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    height: 90vh;
+    position: relative;
+    top: 40px;
+    width: 50%;
+    background-color:#D5DBDB;
+    border-radius: 50px 70px 20px 20px ;
+    margin: auto;
+    gap: 40px;
 }
 
 h1{
+ 
     text-align: center;
-    color: #b7e4c7;
-    font-size: 75px;
-    font-weight: 900;
+    text-transform: capitalize;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+
 }
 
-h2{
+.buttonSocial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Ajusta el espacio interno del botón */
+    background-color: rgb(255, 255, 255); /* Color de fondo */
+    color: #333; /* Color del texto */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+    width: 150px;
+  }
+  
+  .buttonSocial:hover {
+    background-color: rgb(154, 227, 185); /* Color de fondo al pasar el ratón */
+    color: #000; /* Color del texto al pasar el ratón */
+  }
+  
+  .buttonSocial:active {
+    background-color: rgb(134, 207, 165); /* Color de fondo al hacer clic */
+    color: #000; /* Color del texto al hacer clic */
+  }
+  
+  .buttonSocial:focus {
+    outline: none; /* Quitar borde del foco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Añadir sombra para el foco */
+  }
+
+   .buttonSocial a{
+    text-decoration: none;
+    color: black;
+   }
+
+.socialNetworks{
+    display: flex;
+    justify-content: space-evenly;
     text-align: center;
-    color: #000000;
-    font-size: 40px;
-    font-weight: 900;
+    width: 100%;
+
 }
-.container1 {
+
+
+.buttonsContainer{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: space-around;
+    text-align: center;
+    width: 80%;
+    align-items: flex-end;
+    height: 30px;
+
+
+}
+
+
+.button {
+    background-color: #090a09;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     width: 100%;
 }
-.container2{
-    background: rgba(0, 0, 0, 0.63);
-    border-radius: 15px 0PX 15PX 0PX;
-    width: 50%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
+.button:hover {
+    background-color: #a6f0c7;
 }
-.container3{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.dialogContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 20px;
+    z-index: 1000;
 }
+
 .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 32px;
-    gap: 25px;
 }
 
-.input{
-    width: 100%;
-    border: none;
-    padding: 10px;
-    border-radius:  10px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.5) 5px 6px;
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
-.button{
-    width: 75%;
-    height: 75%;
-    padding: 0px;
-    border: none;
-    background-color: white;
-    border-radius: 10px;
-    margin: 10px;
-    font-size: 20px;
+
+.input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.buttonSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.googleButton {
+    display: block;
+    text-align: center;
+    color: #4285F4;
+    text-decoration: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
