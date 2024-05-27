@@ -9,18 +9,18 @@
     position: relative;
     top: 40px;
     width: 50%;
-    background-color:#D5DBDB;
+    background-color:#b7e4c7;
     border-radius: 50px 70px 20px 20px ;
     margin: auto;
     gap: 40px;
+
 }
 
-h1{
- 
+.container1 h1{
     text-align: center;
     text-transform: capitalize;
-    font-size: 40px;
-    color: rgb(255, 255, 255);
+    font-size: 60px;
+    color: rgb(0, 0, 0);
 
 }
 
@@ -40,12 +40,12 @@ h1{
   }
   
   .buttonSocial:hover {
-    background-color: rgb(154, 227, 185); /* Color de fondo al pasar el ratón */
+    background-color: rgb(148, 222, 228); /* Color de fondo al pasar el ratón */
     color: #000; /* Color del texto al pasar el ratón */
   }
   
   .buttonSocial:active {
-    background-color: rgb(134, 207, 165); /* Color de fondo al hacer clic */
+    background-color: rgb(148, 222, 228); /* Color de fondo al hacer clic */
     color: #000; /* Color del texto al hacer clic */
   }
   
@@ -92,9 +92,7 @@ h1{
     width: 100%;
 }
 
-.button:hover {
-    background-color: #a6f0c7;
-}
+
 
 .dialogContainer {
     position: fixed;

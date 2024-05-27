@@ -2,16 +2,27 @@ import { navigateTo } from '../../../../../Router.js';
 import { formValidator } from '../../../../../helpers';
 import 'boxicons';
 import style from './login-form.css';
+import video from '../../../../../assets/img/video_Login.mp4';
+import img from '../../../../../assets/img/file.png';
 
 export async function LoginFormComponent() {
   const root = document.getElementById('root');
 
-  console.log(style);
   root.innerHTML = `
     <div class="${style.body}">
+      <video id="backgroundVideo" autoplay muted loop class="${style.videoBackground}">
+        <source src="${video}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="${style.overlay}"></div>
       <div class="${style.container1}">
-        <h1 class="tit1">HEALTH-HUB</h1>
-        <h2 class="tit2">Empower your wellness journey</h2>
+      <div>
+      <h1 class="tit1">HEALTH-HUB</h1>
+      <h2 class="tit2">Empower your wellness journey</h2>
+      </div>
+        <div>
+        <img class="${style.img}" src="${img}" alt="Logo">
+        </div>
       </div>
       <div class="${style.container2}">
         <div class="${style.form1}">
@@ -55,6 +66,9 @@ export async function LoginFormComponent() {
       alert('Invalid credentials');
     }
   });
+
+  const videoElement = document.getElementById('backgroundVideo');
+  videoElement.playbackRate = 1.0; // Adjusts the video speed
 }
 
 async function login(email, password) {
@@ -73,7 +87,7 @@ async function login(email, password) {
     }
 
     const data = await response.json();
-    console.log(`Este es el token: ${data.token}`);
+    console.log(`This is the token: ${data.token}`);
     return data.token;
   } catch (error) {
     console.error('Login failed:', error);
