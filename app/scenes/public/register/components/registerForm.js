@@ -26,9 +26,6 @@ export async function RegisterFormComponent() {
             <box-icon type='logo' name='twitter'></box-icon>
             <a href="#" class="${style.facebookButton}">Twitter</a>
           </div>
-          
-          
-    
   </div>
 
   <dialog id="patientInfo" class="${style.dialogContainer}">
@@ -40,7 +37,7 @@ export async function RegisterFormComponent() {
               <input type="number" id="patientRoleId" placeholder="Role ID" class="${style.input}" value="1" hidden>
           </section>
           <section class="${style.buttonSection}">
-              <button type="submit" class="${style.button}">Register</button>
+              <button type="button" id="registerPatientSubmit" class="${style.button}">Register</button>
               <button type="button" id="closePatientInfo" class="${style.button}">Close</button>
               <a href="#" class="${style.googleButton}">Register with Google</a>
           </section>
@@ -56,7 +53,7 @@ export async function RegisterFormComponent() {
               <input type="number" id="physicianRoleId" placeholder="Role ID" class="${style.input}" value="2" hidden>
           </section>
           <section class="${style.buttonSection}">
-              <button type="submit" class="${style.button}">Register</button>
+              <button type="button" id="registerPhysicianSubmit" class="${style.button}">Register</button>
               <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
               <a href="#" class="${style.googleButton}">Register with Google</a>
           </section>
@@ -80,33 +77,37 @@ export async function RegisterFormComponent() {
   d.getElementById("closePatientInfo").addEventListener("click", () => closeDialog(patientInfo));
   d.getElementById("closePhysicianInfo").addEventListener("click", () => closeDialog(physicianInfo));
 
-  async function handleRegister(form, role) {
+  async function handleRegister(role) {
+    const form = d.getElementById(`${role}Form`);
     const name = form.querySelector(`#${role}Name`).value;
     const email = form.querySelector(`#${role}Email`).value;
     const password = form.querySelector(`#${role}Password`).value;
-    const role_id = form.querySelector(`#${role}RoleId`).value;
+    const rol_id = Number(form.querySelector(`#${role}RoleId`).value);
+
+    console.log("Registering user:", { name, email, password, role_id: rol_id }); // Log para depuración
+    console.log("Type of role_id:", typeof rol_id); // Verificar el tipo de role_id
 
     if (!formValidator(name, email, password)) {
       alert("Please fill in all fields correctly");
       return;
     }
-
+    console.log({ rol_id })
     try {
       const response = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password, role_id }),
+        body: JSON.stringify({ name, email, password, rol_id }),
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
 
       const data = await response.json();
 
       console.log("Response data:", data);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
       if (data.exists) {
         alert("User already exists");
@@ -126,13 +127,6 @@ export async function RegisterFormComponent() {
     }
   }
 
-  d.getElementById("patientForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    handleRegister(event.target, "patient");
-  });
-
-  d.getElementById("physicianForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    handleRegister(event.target, "physician");
-  });
+  d.getElementById("registerPatientSubmit").addEventListener("click", () => handleRegister("patient"));
+  d.getElementById("registerPhysicianSubmit").addEventListener("click", () => handleRegister("physician"));
 }
