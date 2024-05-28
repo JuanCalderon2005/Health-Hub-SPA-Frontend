@@ -122,7 +122,7 @@ export function HomeScene() {
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
 
-    const userId = 3; // Assuming you have a way to get the user's ID
+    const userId = 3;
 
     document.getElementById("createTopicButton").addEventListener("click", createTopic);
 

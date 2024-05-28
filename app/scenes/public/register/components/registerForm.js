@@ -37,7 +37,7 @@ export async function RegisterFormComponent() {
               <input type="text" id="patientName" placeholder="Name" class="${style.input}">
               <input type="email" id="patientEmail" placeholder="Email" class="${style.input}">
               <input type="password" id="patientPassword" placeholder="Password" class="${style.input}">
-              <input type="number" id="patientRoleId" placeholder="Role ID" class="${style.input}" value="1" readonly>
+              <input type="number" id="patientRoleId" placeholder="Role ID" class="${style.input}" value="1" hidden>
           </section>
           <section class="${style.buttonSection}">
               <button type="submit" class="${style.button}">Register</button>
@@ -53,7 +53,7 @@ export async function RegisterFormComponent() {
               <input type="text" id="physicianName" placeholder="Name" class="${style.input}">
               <input type="email" id="physicianEmail" placeholder="Email" class="${style.input}">
               <input type="password" id="physicianPassword" placeholder="Password" class="${style.input}">
-              <input type="number" id="physicianRoleId" placeholder="Role ID" class="${style.input}" value="2" readonly>
+              <input type="number" id="physicianRoleId" placeholder="Role ID" class="${style.input}" value="2" hidden>
           </section>
           <section class="${style.buttonSection}">
               <button type="submit" class="${style.button}">Register</button>
@@ -80,10 +80,11 @@ export async function RegisterFormComponent() {
   d.getElementById("closePatientInfo").addEventListener("click", () => closeDialog(patientInfo));
   d.getElementById("closePhysicianInfo").addEventListener("click", () => closeDialog(physicianInfo));
 
-  async function handleRegister(form, type) {
-    const name = form.querySelector(`#${type}Name`).value;
-    const email = form.querySelector(`#${type}Email`).value;
-    const password = form.querySelector(`#${type}Password`).value;
+  async function handleRegister(form, role) {
+    const name = form.querySelector(`#${role}Name`).value;
+    const email = form.querySelector(`#${role}Email`).value;
+    const password = form.querySelector(`#${role}Password`).value;
+    const role_id = form.querySelector(`#${role}RoleId`).value;
 
     if (!formValidator(name, email, password)) {
       alert("Please fill in all fields correctly");
@@ -96,7 +97,7 @@ export async function RegisterFormComponent() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password, role_id: type === "patient" ? 1 : 2 }),
+        body: JSON.stringify({ name, email, password, role_id }),
       });
 
       if (!response.ok) {
@@ -111,9 +112,12 @@ export async function RegisterFormComponent() {
         alert("User already exists");
       } else if (data.success) {
         alert("Registration successful");
-        closeDialog(d.getElementById(`${type}Info`));
+        closeDialog(d.getElementById(`${role}Info`));
+        setTimeout(() => {
+          navigateTo("/login");
+        }, 2000);
       } else {
-        alert("Register Success")
+        alert("Registration failed. Please try again.");
       }
 
     } catch (error) {
@@ -125,18 +129,10 @@ export async function RegisterFormComponent() {
   d.getElementById("patientForm").addEventListener("submit", (event) => {
     event.preventDefault();
     handleRegister(event.target, "patient");
-    setTimeout(() => {
-      navigateTo("/login")
-    }, 2000);
-
   });
 
   d.getElementById("physicianForm").addEventListener("submit", (event) => {
     event.preventDefault();
     handleRegister(event.target, "physician");
-    setTimeout(() => {
-      navigateTo("/login")
-    }, 2000);
-
   });
 }
