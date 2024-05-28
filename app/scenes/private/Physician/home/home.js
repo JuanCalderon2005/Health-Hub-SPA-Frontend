@@ -9,27 +9,27 @@ export function HomeScene() {
   if (roleID === '1') {
     pageContent = `
       <section class="${styles['grid-container']}">
-      <div class="${styles['left-container']}">
-        <div id="routineList" class="${styles['list-container']}"></div>
-      </div>
+        <div class="${styles['left-container']}">
+          <div id="routineList" class="${styles['list-container']}"></div>
+        </div>
 
-      <div id="my-id"></div>
+        <div id="my-id"></div>
 
-      <div class="${styles['other-container']}">
-        <div id="tipList" class="${styles['list-container']}"></div>
-      </div>
-      <div class=${styles['right-container']}>
-          <div class=${styles['forum-container']}>
-            <div class=${styles['create-post-container']}>
-              <div class=${styles['create-post-header']}>
-                <p class=${styles['text']}>Create New Subject</p>
+        <div class="${styles['other-container']}">
+          <div id="tipList" class="${styles['list-container']}"></div>
+        </div>
+        <div class="${styles['right-container']}">
+          <div class="${styles['forum-container']}">
+            <div class="${styles['create-post-container']}">
+              <div class="${styles['create-post-header']}">
+                <p class="${styles['text']}">Create New Subject</p>
               </div>
-              <div class=${styles['create-post-body']}>
-                <div class=${styles['input-container']}>
-                  <span class=${styles['input-icon']}>📝</span>
+              <div class="${styles['create-post-body']}">
+                <div class="${styles['input-container']}">
+                  <span class="${styles['input-icon']}">📝</span>
                   <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
                   <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
-                  <button class=${styles['boton-send']} onclick="createTopic()">Send</button>
+                  <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
                 </div>
               </div>
             </div>
@@ -58,18 +58,18 @@ export function HomeScene() {
           <div id="tipList" class="${styles['list-container']}"></div>
         </div>
 
-        <div class=${styles['right-container']}>
-          <div class=${styles['forum-container']}>
-            <div class=${styles['create-post-container']}>
-              <div class=${styles['create-post-header']}>
-                <p class=${styles['text']}>Create New Subject</p>
+        <div class="${styles['right-container']}">
+          <div class="${styles['forum-container']}">
+            <div class="${styles['create-post-container']}">
+              <div class="${styles['create-post-header']}">
+                <p class="${styles['text']}">Create New Subject</p>
               </div>
-              <div class=${styles['create-post-body']}>
-                <div class=${styles['input-container']}>
-                  <span class=${styles['input-icon']}>📝</span>
+              <div class="${styles['create-post-body']}">
+                <div class="${styles['input-container']}">
+                  <span class="${styles['input-icon']}">📝</span>
                   <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
                   <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
-                  <button class=${styles['boton-send']} onclick="createTopic()">Send</button>
+                  <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
                 </div>
               </div>
             </div>
@@ -80,7 +80,7 @@ export function HomeScene() {
       </section>
 
       <dialog id="routineDialog" class="${styles.routineDialogContainer}">
-        <form method="dialog" class="${styles.foms}">
+        <form method="dialog" class="${styles.forms}">
           <section class="${styles['dialog-content']}">
             <h1>Crear Rutina</h1>
             <label for="routineType">Tipo de Rutina:</label>
@@ -96,7 +96,7 @@ export function HomeScene() {
       </dialog>
 
       <dialog id="tipDialog" class="${styles.tipDialogContainer}">
-        <form method="dialog" class="${styles.foms}">
+        <form method="dialog" class="${styles.forms}">
           <section class="${styles['dialog-content']}">
             <h1>Crear Tip</h1>
             <label for="tipType">Tipo de Tip:</label>
@@ -114,7 +114,6 @@ export function HomeScene() {
   }
 
   const logic = async () => {
-
     const updateRoutineButton = document.getElementById("updateRoutine");
     const routineDialog = document.getElementById("routineDialog");
     const routineList = document.getElementById("routineList");
@@ -125,7 +124,9 @@ export function HomeScene() {
 
     const userId = 3; // Assuming you have a way to get the user's ID
 
-    window.createTopic = function () {
+    document.getElementById("createTopicButton").addEventListener("click", createTopic);
+
+    function createTopic() {
       const topicTitle = document.getElementById('topicTitleInput').value;
       const topicMessage = document.getElementById('topicMessageInput').value;
 
@@ -159,7 +160,7 @@ export function HomeScene() {
 
       document.getElementById('topicTitleInput').value = "";
       document.getElementById('topicMessageInput').value = "";
-    };
+    }
 
     window.showReplyForm = function (topicTitle) {
       const replyForm = document.getElementById(`replyForm-${topicTitle}`);
@@ -200,44 +201,52 @@ export function HomeScene() {
           comment: replyInput
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     };
 
-    updateRoutineButton.addEventListener("click", () => {
-      routineDialog.showModal();
-    });
+    if (updateRoutineButton) {
+      updateRoutineButton.addEventListener("click", () => {
+        routineDialog.showModal();
+      });
+    }
 
-    routineDialog.querySelector('form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const routineType = document.getElementById('routineType').value;
-      const routineDuration = document.getElementById('routineDuration').value;
-      const routineItem = document.createElement('div');
-      routineItem.classList.add(styles['list-item']);
-      routineItem.innerHTML = `<strong>${routineType}</strong> - ${routineDuration} minutos`;
-      routineList.appendChild(routineItem);
-      routineDialog.close();
-    });
+    if (routineDialog) {
+      routineDialog.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const routineType = document.getElementById('routineType').value;
+        const routineDuration = document.getElementById('routineDuration').value;
+        const routineItem = document.createElement('div');
+        routineItem.classList.add(styles['list-item']);
+        routineItem.innerHTML = `<strong>${routineType}</strong> - ${routineDuration} minutos`;
+        routineList.appendChild(routineItem);
+        routineDialog.close();
+      });
+    }
 
-    updateTipButton.addEventListener("click", () => {
-      tipDialog.showModal();
-    });
+    if (updateTipButton) {
+      updateTipButton.addEventListener("click", () => {
+        tipDialog.showModal();
+      });
+    }
 
-    tipDialog.querySelector('form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const tipType = document.getElementById('tipType').value;
-      const tipDescription = document.getElementById('tipDescription').value;
-      const tipItem = document.createElement('div');
-      tipItem.classList.add(styles['list-item']);
-      tipItem.innerHTML = `<strong>${tipType}</strong> - ${tipDescription}`;
-      tipList.appendChild(tipItem);
-      tipDialog.close();
-    });
+    if (tipDialog) {
+      tipDialog.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const tipType = document.getElementById('tipType').value;
+        const tipDescription = document.getElementById('tipDescription').value;
+        const tipItem = document.createElement('div');
+        tipItem.classList.add(styles['list-item']);
+        tipItem.innerHTML = `<strong>${tipType}</strong> - ${tipDescription}`;
+        tipList.appendChild(tipItem);
+        tipDialog.close();
+      });
+    }
   };
 
   return {
