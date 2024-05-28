@@ -112,7 +112,7 @@ export async function RegisterFormComponent() {
       } else if (data.success) {
         alert("Registration successful");
         closeDialog(d.getElementById(`${type}Info`));
-      }else{
+      } else {
         alert("Register Success")
       }
 
@@ -127,8 +127,8 @@ export async function RegisterFormComponent() {
     handleRegister(event.target, "patient");
     setTimeout(() => {
       navigateTo("/login")
-    },2000);
-    
+    }, 2000);
+
   });
 
   d.getElementById("physicianForm").addEventListener("submit", (event) => {
@@ -136,7 +136,7 @@ export async function RegisterFormComponent() {
     handleRegister(event.target, "physician");
     setTimeout(() => {
       navigateTo("/login")
-    },2000);
-    
+    }, 2000);
+
   });
 }
