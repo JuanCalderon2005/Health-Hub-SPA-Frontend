@@ -12,27 +12,27 @@ export async function LoginFormComponent() {
     <div class="${style.body}">
       <video id="backgroundVideo" autoplay muted loop class="${style.videoBackground}">
         <source src="${video}" type="video/mp4">
-        Your browser does not support the video tag.
+        Your browser does not support the video tag. 
       </video>
       <div class="${style.overlay}"></div>
       <div class="${style.container1}">
-      <div>
-      <h1 class="tit1">HEALTH-HUB</h1>
-      <h2 class="tit2">Empower your wellness journey</h2>
-      </div>
         <div>
-        <img class="${style.img}" src="${img}" alt="Logo">
+          <h1 class="tit1">HEALTH-HUB</h1>
+          <h2 class="tit2">Empower your wellness journey</h2>
+        </div>
+        <div>
+          <img class="${style.img}" src="${img}" alt="Logo">
         </div>
       </div>
       <div class="${style.container2}">
         <div class="${style.form1}">
           <form class="${style.form}" method="post" id="loginForm">
             <input class="${style.input}" type="email" name="email" placeholder="john@doe.com" id="email">
-            <input class="${style.input}" type="password" name="password" placeholder="********" id="password">
+            <input class="${style.input}" type="password" name="password" placeholder="*******" id="password">
             <input class="${style.buttonLogin}" type="submit" name="login" value="Login">
             <div class="${style.cont}">
               <button id="login-with-google" class="${style.button}" type="button">Google</button>
-              <button id="/register" class="${style.button}" type="button">New Account</button>
+              <button id="register" class="${style.button}" type="button">New Account</button>
             </div>
             <a href="#" class="${style.forpass}">Forgot password?</a>
           </form>
@@ -41,7 +41,7 @@ export async function LoginFormComponent() {
     </div>
   `;
 
-  const newRegister = document.getElementById('/register');
+  const newRegister = document.getElementById('register');
   newRegister.addEventListener('click', () => {
     navigateTo('/register');
   });
@@ -57,10 +57,11 @@ export async function LoginFormComponent() {
       return;
     }
 
-    const token = await login(email, password);
+    const [token, role] = await login(email, password);
 
     if (token) {
       localStorage.setItem('token', token);
+      localStorage.setItem('rol', role);
       navigateTo('/dashboard');
     } else {
       alert('Invalid credentials');
@@ -81,6 +82,8 @@ async function login(email, password) {
       body: JSON.stringify({ email, password }),
     });
 
+    console.log(response);
+
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(`Error ${response.status}: ${errorMessage}`);
@@ -88,7 +91,8 @@ async function login(email, password) {
 
     const data = await response.json();
     console.log(`This is the token: ${data.token}`);
-    return data.token;
+    console.log(data.role);
+    return [data.token, data.role];
   } catch (error) {
     console.error('Login failed:', error);
     return null;

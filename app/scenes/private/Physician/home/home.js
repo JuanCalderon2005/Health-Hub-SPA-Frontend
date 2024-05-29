@@ -2,11 +2,13 @@ import styles from './home.css';
 import 'boxicons';
 
 export function HomeScene() {
-  const roleID = localStorage.getItem('roleID');
+  // Obtener el rol del almacenamiento local
+  const roleID = localStorage.getItem('rol');
 
   let pageContent;
 
   if (roleID === '1') {
+    // Contenido para el rol 1
     pageContent = `
       <section class="${styles['grid-container']}">
         <div class="${styles['left-container']}">
@@ -40,6 +42,7 @@ export function HomeScene() {
       </section>
     `;
   } else if (roleID === '2') {
+    // Contenido para el rol 2
     pageContent = `
       <section class="${styles['grid-container']}">
         <div class="${styles['left-container']}">
@@ -122,9 +125,9 @@ export function HomeScene() {
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
 
-    const userId = 3;
-
-    document.getElementById("createTopicButton").addEventListener("click", createTopic);
+    if (document.getElementById("createTopicButton")) {
+      document.getElementById("createTopicButton").addEventListener("click", createTopic);
+    }
 
     function createTopic() {
       const topicTitle = document.getElementById('topicTitleInput').value;
@@ -190,7 +193,7 @@ export function HomeScene() {
       replyForm.querySelector('textarea').value = '';
       replyForm.style.display = 'none';
 
-      // Send the reply to the server
+      // Enviar la respuesta al servidor
       fetch('http://localhost:3000/comments', {
         method: 'POST',
         headers: {
@@ -201,13 +204,13 @@ export function HomeScene() {
           comment: replyInput
         })
       })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Éxito:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     };
 
     if (updateRoutineButton) {
@@ -248,9 +251,9 @@ export function HomeScene() {
       });
     }
   };
-
+  
   return {
-    pageContent,
-    logic
+    logic,
+    pageContent
   };
 }
