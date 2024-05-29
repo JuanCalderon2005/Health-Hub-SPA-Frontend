@@ -27,7 +27,8 @@
 }
 
 .container h3 {
-    color: #586232;
+    color: rgba(78, 118, 81, 0.7);
+    font-weight: 700;
 }
 
 .bellButton {

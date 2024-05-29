@@ -1,15 +1,15 @@
 import styles from './home.css';
 import 'boxicons';
+import 'bootstrap'
+import * as echarts from 'echarts';
 
 export function HomeScene() {
-  // Obtener el rol del almacenamiento local
   const roleID = localStorage.getItem('rol');
 
   let pageContent;
 
   if (roleID === '1') {
-    // Contenido para el rol 1
-    pageContent = `
+    pageContent = /*html*/`
       <section class="${styles['grid-container']}">
         <div class="${styles['left-container']}">
           <div id="routineList" class="${styles['list-container']}"></div>
@@ -20,6 +20,9 @@ export function HomeScene() {
         <div class="${styles['other-container']}">
           <div id="tipList" class="${styles['list-container']}"></div>
         </div>
+        <div class="${styles['right-progress']}">
+          <div id="${styles.echart}"></div>
+        </div>
         <div class="${styles['right-container']}">
           <div class="${styles['forum-container']}">
             <div class="${styles['create-post-container']}">
@@ -28,7 +31,6 @@ export function HomeScene() {
               </div>
               <div class="${styles['create-post-body']}">
                 <div class="${styles['input-container']}">
-                  <span class="${styles['input-icon']}">📝</span>
                   <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
                   <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
                   <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
@@ -42,10 +44,10 @@ export function HomeScene() {
       </section>
     `;
   } else if (roleID === '2') {
-    // Contenido para el rol 2
-    pageContent = `
-      <section class="${styles['grid-container']}">
-        <div class="${styles['left-container']}">
+    pageContent = /*html*/`
+    ``
+      <section class="${styles['grid-container-doctor']}">
+        <div class="${styles['left-container-doctor']}">
           <div class="${styles.contBottom}">
             <button type="button" id="updateRoutine" class="${styles.newTip}">Agregar Rutina</button>
           </div>
@@ -54,14 +56,14 @@ export function HomeScene() {
 
         <div id="my-id"></div>
 
-        <div class="${styles['other-container']}">
+        <div class="${styles['other-container-doctor']}">
           <div class="${styles.contBottom}">
             <button type="button" id="updateTip" class="${styles.newTip}">Agregar Tip</button>
           </div>
           <div id="tipList" class="${styles['list-container']}"></div>
         </div>
 
-        <div class="${styles['right-container']}">
+        <div class="${styles['right-container-doctor']}">
           <div class="${styles['forum-container']}">
             <div class="${styles['create-post-container']}">
               <div class="${styles['create-post-header']}">
@@ -69,7 +71,6 @@ export function HomeScene() {
               </div>
               <div class="${styles['create-post-body']}">
                 <div class="${styles['input-container']}">
-                  <span class="${styles['input-icon']}">📝</span>
                   <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
                   <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
                   <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
@@ -121,6 +122,28 @@ export function HomeScene() {
     const routineDialog = document.getElementById("routineDialog");
     const routineList = document.getElementById("routineList");
 
+    const grafico = document.getElementById(styles.echart)
+    console.log(grafico);
+    const myChart = echarts.init(grafico);
+
+    myChart.setOption({
+      title: {
+        text: 'ECharts Getting Started Example'
+      },
+      tooltip: {},
+      xAxis: {
+        data: ['shirt', 'cardigan', 'chiffon', 'pants', 'heels', 'socks']
+      },
+      yAxis: {},
+      series: [
+        {
+          name: 'sales',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }
+      ]
+    });
+
     const updateTipButton = document.getElementById("updateTip");
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
@@ -144,7 +167,7 @@ export function HomeScene() {
       newTopicElement.innerHTML = `
         <div class="${styles['topic-header-FF']}">
           <div class="${styles['topic-header']}">
-            <h3>${topicTitle}</h3>
+            <h3 class = "${styles.texttit}">${topicTitle}</h3>
           </div>
           <div class="${styles['topic-body']}">${topicMessage}</div>
           <div class="${styles['reply-container']}">
@@ -193,6 +216,8 @@ export function HomeScene() {
       replyForm.querySelector('textarea').value = '';
       replyForm.style.display = 'none';
 
+      const userId = localStorage.getItem('user_id');
+
       // Enviar la respuesta al servidor
       fetch('http://localhost:3000/comments', {
         method: 'POST',
@@ -204,13 +229,13 @@ export function HomeScene() {
           comment: replyInput
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Éxito:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log('Éxito:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     };
 
     if (updateRoutineButton) {
@@ -224,6 +249,7 @@ export function HomeScene() {
         e.preventDefault();
         const routineType = document.getElementById('routineType').value;
         const routineDuration = document.getElementById('routineDuration').value;
+
         const routineItem = document.createElement('div');
         routineItem.classList.add(styles['list-item']);
         routineItem.innerHTML = `<strong>${routineType}</strong> - ${routineDuration} minutos`;
@@ -235,6 +261,7 @@ export function HomeScene() {
     if (updateTipButton) {
       updateTipButton.addEventListener("click", () => {
         tipDialog.showModal();
+
       });
     }
 
@@ -251,7 +278,7 @@ export function HomeScene() {
       });
     }
   };
-  
+
   return {
     logic,
     pageContent

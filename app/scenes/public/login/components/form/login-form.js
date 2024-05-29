@@ -57,11 +57,12 @@ export async function LoginFormComponent() {
       return;
     }
 
-    const [token, role] = await login(email, password);
+    const [token, role, userId] = await login(email, password);
 
     if (token) {
       localStorage.setItem('token', token);
       localStorage.setItem('rol', role);
+      localStorage.setItem('userId', userId);
       navigateTo('/dashboard');
     } else {
       alert('Invalid credentials');
