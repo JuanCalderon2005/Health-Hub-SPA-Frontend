@@ -284,24 +284,27 @@ export function HomeScene() {
     window.submitReply = function (topicTitle) {
       const replyForm = document.getElementById(`replyForm-${topicTitle}`);
       const replyInput = replyForm.querySelector('textarea').value;
-
+    
       if (replyInput.trim() === "") {
         alert("Por favor, escribe un mensaje.");
         return;
       }
-
+    
       const replyArea = document.getElementById(`replyArea-${topicTitle}`);
       const replyElement = document.createElement('div');
+    
       replyElement.className = styles['reply-item'];
       replyElement.innerHTML = `<div class="${styles['reply-body']}">${replyInput}</div>`;
+    
       replyArea.appendChild(replyElement);
-
+    
       replyForm.querySelector('textarea').value = '';
       replyForm.style.display = 'none';
-
+    
       const userId = localStorage.getItem('user_id');
 
-      // Enviar la respuesta al servidor
+    
+      // Enviar el comentario al servidor
       fetch('http://localhost:3000/comments', {
         method: 'POST',
         headers: {
@@ -309,7 +312,7 @@ export function HomeScene() {
         },
         body: JSON.stringify({
           user_id: userId,
-          comment: replyInput
+          comment: replyInput // Cambiado a replyInput
         })
       })
         .then(response => response.json())

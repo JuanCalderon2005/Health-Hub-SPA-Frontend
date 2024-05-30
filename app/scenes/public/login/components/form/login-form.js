@@ -63,6 +63,7 @@ export async function LoginFormComponent() {
       localStorage.setItem('token', token);
       localStorage.setItem('rol', role);
       localStorage.setItem('userId', userId);
+      console.log(userId)
       navigateTo('/dashboard');
     } else {
       alert('Invalid credentials');
@@ -93,7 +94,9 @@ async function login(email, password) {
     const data = await response.json();
     console.log(`This is the token: ${data.token}`);
     console.log(data.role);
-    return [data.token, data.role];
+    localStorage.setItem('userId', data.userId);
+
+    return [data.token, data.role, data.userId];
   } catch (error) {
     console.error('Login failed:', error);
     return null;
