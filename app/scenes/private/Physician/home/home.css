@@ -5,7 +5,6 @@
 }
 
 /* grid de la vista del paciente */
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(20, 1fr); /* Ajustado a 20 columnas */
@@ -17,49 +16,32 @@
   right: 50px;
 }
 
-.left-container {
-  background-color: #fff;
+.left-container, .other-container, .right-container {
+  background-color: #000000cc;
   border-radius: 15px;
-  grid-column: 1/7; /* Ajustado para que ocupe 6 columnas */
-  grid-row: 1/9;
   display: flex;
   flex-direction: column;
   padding: 20px;
   overflow-y: auto;
   max-height: 93vh;
-  background-color: #000000cc;
+}
+
+.left-container {
+  grid-column: 1/7; /* Ajustado para que ocupe 6 columnas */
+  grid-row: 1/9;
 }
 
 .other-container {
-  background-color: #fff;
-  border-radius: 15px;
   grid-column: 7/14; /* Ajustado para que ocupe 7 columnas */
   grid-row: 1/9;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 93vh;
-  background-color: #000000cc;
 }
 
-/* grid del foro */
 .right-container {
-  background-color: #fff;
-  border-radius: 15px;
   grid-column: 14/-1; /* Ajustado para ocupar las 6 columnas restantes */
   grid-row: 1/-1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 93vh;
-  background-color: #000000cc;
 }
 
-
 /* contenedor del foro */
-
 .right-progress {
   border-radius: 15px;
   grid-column: 1/14; /* Ajustado para ocupar el ancho completo */
@@ -69,7 +51,6 @@
   background-color: #000000cc;
 }
 
-
 .create-post-container {
   background-color: #ffffff;
   border-radius: 8px;
@@ -77,15 +58,14 @@
   width: 100%;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 190px;
-
+  height: auto;
+ 
 }
 
 .create-post-header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .create-post-body {
@@ -109,7 +89,7 @@
   font-size: 14px; /* Reduce the font size */
 }
 
-.container-button{
+.container-button {
   display: flex;
   justify-content: flex-end;
 }
@@ -139,7 +119,6 @@
 .texForo {
   font-size: 14px; /* Reduce the font size */
   font-weight: bold;
-
 }
 
 .text {
@@ -148,46 +127,44 @@
   color: #101010;
 }
 
+#echart{
+  width: 60%;
+  height: 100%;
+}
+
+#barEchart{
+  width: 50%;
+  height: 100%;
+}
 
 /* estilos del contenido del medico */
-
-.other-container-doctor{
-  background-color: #fff;
+.other-container-doctor, .right-container-doctor, .left-container-doctor {
+  background-color: #000000cc;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 93vh;
+  color: white;
+}
+
+.other-container-doctor {
   grid-column: 1/13; /* Ajustado para que ocupe 7 columnas */
   grid-row: 8/-1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 93vh;
 }
 
-.right-container-doctor{
-  background-color: #fff;
-  border-radius: 15px;
+.right-container-doctor {
   grid-column: 13/-1; /* Ajustado para ocupar las 6 columnas restantes */
   grid-row: 1/-1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 93vh;
 }
 
-.left-container-doctor{
-  background-color: #fff;
-  border-radius: 15px;
+.left-container-doctor {
   grid-column: 1/13; /* Ajustado para que ocupe 6 columnas */
   grid-row: 1/8;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 93vh;
 }
 
-.grid-container-doctor{
+.grid-container-doctor {
   display: grid;
   grid-template-columns: repeat(20, 1fr); /* Ajustado a 20 columnas */
   grid-template-rows: repeat(15, 1fr);
@@ -198,39 +175,172 @@
   right: 50px;
 }
 
-.newTip{
-  background-color: #f5f5f5;
+.newTip {
+  background-color: #c2ffb6;
   border-radius: 8px;
-  padding: 16px;
-  width: 50%;
+  padding: 10px;
+  width: 40%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
 }
 
-.newTip:hover{
+.newTip:hover {
   background-color: #b7e4c7;
 }
 
-#echart{
-  width: 50%;
-  height: 100%;
-}
-
-#barEchart{
-  width: 50%;
-  height: 100%;
-}
-
-
-/* estiloes de responder en el foro */
-
-.topic-header-FF{
-  background-color: #fff;
-  border-radius: 10px;
-
-}
-
-.topic-body{
+/* estilos de responder en el foro */
+.topic-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Añade un espacio entre los elementos */
   padding: 20px;
-  height: 70px;
-  font-size: 15px;
+}
+
+.topic-header-FF {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.topic-body {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.text-topic {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  text-transform: capitalize;
+}
+
+.reply-button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 35%;
+}
+
+.button-reply{
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* estilos para replicar */
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Añade un espacio entre los elementos */
+  padding: 20px;
+
+}
+
+.buttons-reply {
+  display: flex;
+  gap: 20px;
+}
+
+
+
+.btn-reply {
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 20%;
+}
+
+/* Estilo para mensajes replicados */
+.replied-message {
+  background-color: #e0f7fa; /* Color diferente para mensajes replicados */
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* estilo de los dialogos de add tip y add routine */
+
+/* Estilo para centrar los diálogos */
+.routineDialogContainer,
+.tipDialogContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(80px); /* Desenfoque */
+  
+}
+
+/* Estilo para el contenido del diálogo */
+.dialog-content {
+    width: 99%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que el contenido del diálogo esté por encima del fondo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+   
+}
+
+.forms label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.forms input[type="text"],
+.forms input[type="number"],
+.forms textarea {
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.dialog-buttons{
+  display: flex;
+  justify-content:space-around;
+  gap: 20px;
+}
+
+.dialog-buttons button {
+    padding: 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #c2ffb6;
+    width: 200px;
+  
+}
+
+
+
+.dialog-title{
+  text-align: center;
+  font-size: 60px;
+  color: #000000;
 }

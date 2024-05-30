@@ -13,6 +13,7 @@ export function SidebarMenu(data = []) {
           
             <li class="${isActive ? styles.active : ''}">
               <button id="${item.href}" type="button" >${item.icon}</button>
+              
             </li>
           `;
         }).join('')}

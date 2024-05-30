@@ -1,6 +1,6 @@
 import styles from './home.css';
 import 'boxicons';
-import 'bootstrap'
+import 'bootstrap';
 import * as echarts from 'echarts';
 
 export function HomeScene() {
@@ -51,11 +51,10 @@ export function HomeScene() {
     `;
   } else if (roleID === '2') {
     pageContent = /*html*/`
-    
       <section class="${styles['grid-container-doctor']}">
         <div class="${styles['left-container-doctor']}">
           <div class="${styles.contBottom}">
-            <button type="button" id="updateRoutine" class="${styles.newTip}">Agregar Rutina</button>
+            <button type="button" id="updateRoutine" class="${styles.newTip}">Add Routine</button>
           </div>
           <div id="routineList" class="${styles['list-container']}"></div>
         </div>
@@ -64,7 +63,7 @@ export function HomeScene() {
 
         <div class="${styles['other-container-doctor']}">
           <div class="${styles.contBottom}">
-            <button type="button" id="updateTip" class="${styles.newTip}">Agregar Tip</button>
+            <button type="button" id="updateTip" class="${styles.newTip}">Add Tip</button>
           </div>
           <div id="tipList" class="${styles['list-container']}"></div>
         </div>
@@ -88,11 +87,11 @@ export function HomeScene() {
           </div>
         </div>
       </section>
-
+        
       <dialog id="routineDialog" class="${styles.routineDialogContainer}">
         <form method="dialog" class="${styles.forms}">
           <section class="${styles['dialog-content']}">
-            <h1>Crear Rutina</h1>
+            <h1 class="${styles['dialog-title']}">Crear Rutina</h1>
             <label for="routineType">Tipo de Rutina:</label>
             <input type="text" id="routineType" name="routineType" required><br><br>
             <label for="routineDuration">Duración (minutos):</label>
@@ -108,16 +107,16 @@ export function HomeScene() {
       <dialog id="tipDialog" class="${styles.tipDialogContainer}">
         <form method="dialog" class="${styles.forms}">
           <section class="${styles['dialog-content']}">
-            <h1>Crear Tip</h1>
+            <h1 class="${styles['dialog-title']}">Crear Tip</h1>
             <label for="tipType">Tipo de Tip:</label>
             <input type="text" id="tipType" name="tipType" required><br><br>
             <label for="tipDescription">Descripción:</label>
             <textarea id="tipDescription" name="tipDescription" required></textarea>
           </section>
-          <section class="${styles['dialog-buttons']}">
+          <div class="${styles['dialog-buttons']}">
             <button type="button" id="cancelTip" formmethod="dialog">Cancelar</button>
             <button type="submit" id="saveTip">Guardar</button>
-          </section>
+          </div>
         </form>
       </dialog>
     `;
@@ -127,102 +126,106 @@ export function HomeScene() {
     const updateRoutineButton = document.getElementById("updateRoutine");
     const routineDialog = document.getElementById("routineDialog");
     const routineList = document.getElementById("routineList");
+    const cancelRoutineButton = document.getElementById("cancelRoutine");
 
-    const grafico = document.getElementById(styles.echart)
-    const barEcharset = document.getElementById(styles.barEchart)
-    const myChart = echarts.init(grafico);
-    const myOtherCharset = echarts.init(barEcharset)
-    myChart.setOption({
-      tooltip: {
-        trigger: 'item',
-      },
-      legend: {
-        top: '5%',
-        left: 'center',
-        textStyle: {
-          color: 'white' // Cambia el color del texto de la leyenda a blanco
-        }
-      },
-      series: [
-        {
-          name: 'Routines',
-          type: 'pie',
-          radius: ['40%', '70%'],
-          avoidLabelOverlap: false,
-          label: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
+    const grafico = document.getElementById(styles.echart);
+    const barEcharset = document.getElementById(styles.barEchart);
+    const closeRoutine = document.getElementById(styles.cancelRoutine);
+
+    // Ensure the DOM is fully rendered before initializing ECharts
+    requestAnimationFrame(() => {
+      const myChart = echarts.init(grafico);
+      const myOtherCharset = echarts.init(barEcharset);
+      myChart.setOption({
+        tooltip: {
+          trigger: 'item',
+        },
+        legend: {
+          top: '5%',
+          left: 'center',
+          textStyle: {
+            color: 'white' // Cambia el color del texto de la leyenda a blanco
+          }
+        },
+        series: [
+          {
+            name: 'Routines',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: 'white' // Establecer el color del texto enfocado en blanco
+              }
+            },
+            labelLine: {
+              show: false,
+            },
+            data: [
+              { value: 10,  name: 'Routine Sleep', itemStyle: { color: '#a884e9' }, label: { textStyle: { color: 'white' } } }, // Naranja
+              { value: 10,  name: 'Routine Diet', itemStyle: { color: '#8fbdd3' }, label: { textStyle: { color: 'white' } } }, // Cyan
+              { value: 4,  name: 'Routine Sport', itemStyle: { color: '#c4e884' }, label: { textStyle: { color: 'white' } } }, // Magenta
+              { value: 7,  name: 'Other', itemStyle: { color: '#ff8533' }, label: { textStyle: { color: 'white' } } }, // Establecer el color del nombre "Other" en blanco
+            ],
+          }
+        ]
+      });
+      
+      myOtherCharset.setOption({
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLabel: {
+            color: 'white' // Cambia el color de los nombres de las categorías en el eje x a blanco
+          }
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            color: 'white' // Cambia el color de los valores en el eje y a blanco
+          }
+        },
+        series: [
+          {
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: 'bar',
+            itemStyle: {
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  { offset: 0, color: '#ff8533' },    // Color inicial
+                  { offset: 1, color: '#c59eff' }     // Color final
+                ]
+              }
+            },
             label: {
               show: true,
-              fontSize: 20,
-              fontWeight: 'bold',
-              color: 'white' // Establecer el color del texto enfocado en blanco
+              color: '#000' // Cambia el color del texto de las etiquetas de los datos en blanco
+            },
+            showBackground: true,
+            backgroundStyle: {
+              color: '#fff'
             }
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [
-            { value: 10,  name: 'Routine Sleep', itemStyle: { color: '#a884e9' }, label: { textStyle: { color: 'white' } } }, // Naranja
-            { value: 10,  name: 'Routine Diet', itemStyle: { color: '#8fbdd3' }, label: { textStyle: { color: 'white' } } }, // Cyan
-            { value: 4,  name: 'Routine Sport', itemStyle: { color: '#c4e884' }, label: { textStyle: { color: 'white' } } }, // Magenta
-            { value: 7,  name: 'Other', itemStyle: { color: '#ff8533' }, label: { textStyle: { color: 'white' } } }, // Establecer el color del nombre "Other" en blanco
-          ],
-        }
-      ]
-    });
-    
-    
-    
-    myOtherCharset.setOption({
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        axisLabel: {
-          color: 'white' // Cambia el color de los nombres de las categorías en el eje x a blanco
-        }
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          color: 'white' // Cambia el color de los valores en el eje y a blanco
-        }
-      },
-      series: [
-        {
-          data: [120, 200, 150, 80, 70, 110, 130],
-          type: 'bar',
-          itemStyle: {
-            color: {
-              type: 'linear',
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 1,
-              colorStops: [
-                { offset: 0, color: '#ff8533' },    // Color inicial
-                { offset: 1, color: '#c59eff' }     // Color final
-              ]
-            }
-          },
-          label: {
-            show: true,
-            color: '#000' // Cambia el color del texto de las etiquetas de los datos en blanco
-          },
-          showBackground: true,
-          backgroundStyle: {
-            color: '#fff'
           }
-        }
-      ]
+        ]
+      });
     });
-    
     
     const updateTipButton = document.getElementById("updateTip");
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
+    const cancelTipButton = document.getElementById("cancelTip");
 
     if (document.getElementById("createTopicButton")) {
       document.getElementById("createTopicButton").addEventListener("click", createTopic);
@@ -243,17 +246,19 @@ export function HomeScene() {
       newTopicElement.innerHTML = `
         <div class="${styles['topic-header-FF']}">
           <div class="${styles['topic-header']}">
-            <h3 class = "${styles.texttit}">${topicTitle}</h3>
+            <h3 class = "${styles['text-topic']}">${topicTitle}</h3>
           </div>
           <div class="${styles['topic-body']}">${topicMessage}</div>
           <div class="${styles['reply-container']}">
             <div class="${styles['reply-area']}" id="replyArea-${topicTitle}"></div>
-            <button class="${styles['reply-button']}" onclick="showReplyForm('${topicTitle}')">Responder</button>
+            <div class="${styles['button-reply']}"><button class="${styles['reply-button']}" onclick="showReplyForm('${topicTitle}')">Reply</button></div>
           </div>
           <form id="replyForm-${topicTitle}" class="${styles['reply-form']}" style="display: none;">
             <textarea class="${styles['reply-input']}" placeholder="Escribe tu respuesta"></textarea>
-            <button type="button" onclick="submitReply('${topicTitle}')">Enviar</button>
-            <button type="button" onclick="hideReplyForm('${topicTitle}')">Cancelar</button>
+            <div class="${styles['buttons-reply']}">
+             <button type="button" onclick="submitReply('${topicTitle}')" class="${styles['btn-reply']}">Enviar</button>
+             <button type="button" onclick="hideReplyForm('${topicTitle}')" class="${styles['-reply']}">Cancelar</button>
+            </div>
           </form>
         </div>
       `;
@@ -320,6 +325,12 @@ export function HomeScene() {
       });
     }
 
+    if (cancelRoutineButton) {
+      cancelRoutineButton.addEventListener("click", () => {
+        routineDialog.close();
+      });
+    }
+
     if (routineDialog) {
       routineDialog.querySelector('form').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -337,7 +348,12 @@ export function HomeScene() {
     if (updateTipButton) {
       updateTipButton.addEventListener("click", () => {
         tipDialog.showModal();
+      });
+    }
 
+    if (cancelTipButton) {
+      cancelTipButton.addEventListener("click", () => {
+        tipDialog.close();
       });
     }
 
