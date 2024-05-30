@@ -20,20 +20,26 @@ export function HomeScene() {
         <div class="${styles['other-container']}">
           <div id="tipList" class="${styles['list-container']}"></div>
         </div>
+  
         <div class="${styles['right-progress']}">
           <div id="${styles.echart}"></div>
+          <div id="${styles.barEchart}"></div>
+          
         </div>
         <div class="${styles['right-container']}">
           <div class="${styles['forum-container']}">
             <div class="${styles['create-post-container']}">
               <div class="${styles['create-post-header']}">
-                <p class="${styles['text']}">Create New Subject</p>
+                <h3 class="${styles['text']}">Create New Subject</h3>
               </div>
               <div class="${styles['create-post-body']}">
                 <div class="${styles['input-container']}">
                   <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
                   <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
-                  <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
+                  <div class="${styles['container-button']}">
+                    <button class="${styles['boton-publish']}" id="createTopicButton">Publish</button>
+                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -45,7 +51,7 @@ export function HomeScene() {
     `;
   } else if (roleID === '2') {
     pageContent = /*html*/`
-    ``
+    
       <section class="${styles['grid-container-doctor']}">
         <div class="${styles['left-container-doctor']}">
           <div class="${styles.contBottom}">
@@ -123,27 +129,97 @@ export function HomeScene() {
     const routineList = document.getElementById("routineList");
 
     const grafico = document.getElementById(styles.echart)
-    console.log(grafico);
+    const barEcharset = document.getElementById(styles.barEchart)
     const myChart = echarts.init(grafico);
-
+    const myOtherCharset = echarts.init(barEcharset)
     myChart.setOption({
-      title: {
-        text: 'ECharts Getting Started Example'
+      tooltip: {
+        trigger: 'item',
       },
-      tooltip: {},
-      xAxis: {
-        data: ['shirt', 'cardigan', 'chiffon', 'pants', 'heels', 'socks']
+      legend: {
+        top: '5%',
+        left: 'center',
+        textStyle: {
+          color: 'white' // Cambia el color del texto de la leyenda a blanco
+        }
       },
-      yAxis: {},
       series: [
         {
-          name: 'sales',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
+          name: 'Routines',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: 'white' // Establecer el color del texto enfocado en blanco
+            }
+          },
+          labelLine: {
+            show: false,
+          },
+          data: [
+            { value: 10,  name: 'Routine Sleep', itemStyle: { color: '#a884e9' }, label: { textStyle: { color: 'white' } } }, // Naranja
+            { value: 10,  name: 'Routine Diet', itemStyle: { color: '#8fbdd3' }, label: { textStyle: { color: 'white' } } }, // Cyan
+            { value: 4,  name: 'Routine Sport', itemStyle: { color: '#c4e884' }, label: { textStyle: { color: 'white' } } }, // Magenta
+            { value: 7,  name: 'Other', itemStyle: { color: '#ff8533' }, label: { textStyle: { color: 'white' } } }, // Establecer el color del nombre "Other" en blanco
+          ],
         }
       ]
     });
-
+    
+    
+    
+    myOtherCharset.setOption({
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        axisLabel: {
+          color: 'white' // Cambia el color de los nombres de las categorías en el eje x a blanco
+        }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          color: 'white' // Cambia el color de los valores en el eje y a blanco
+        }
+      },
+      series: [
+        {
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar',
+          itemStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: '#ff8533' },    // Color inicial
+                { offset: 1, color: '#c59eff' }     // Color final
+              ]
+            }
+          },
+          label: {
+            show: true,
+            color: '#000' // Cambia el color del texto de las etiquetas de los datos en blanco
+          },
+          showBackground: true,
+          backgroundStyle: {
+            color: '#fff'
+          }
+        }
+      ]
+    });
+    
+    
     const updateTipButton = document.getElementById("updateTip");
     const tipDialog = document.getElementById("tipDialog");
     const tipList = document.getElementById("tipList");
