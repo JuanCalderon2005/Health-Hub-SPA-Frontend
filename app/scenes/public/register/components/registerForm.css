@@ -1,21 +1,30 @@
 
 .container1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    text-align: center;
-    height: 90vh;
-    position: relative;
-    top: 40px;
-    width: 50%;
-    background-color:#b7e4c7;
-    border-radius: 50px 70px 20px 20px ;
-    margin: auto;
-    gap: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        height: 90vh;
+        position: relative;
+        top: 40px;
+        width: 50%;
+        background-color: rgba(249, 250, 249, 0.247); /* Cambiado a un color semi-transparente */
+        border-radius: 50px 70px 20px 20px;
+        margin: auto;
+        gap: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px); /* Reducido el valor del desenfoque */
+    }
+    
 
+
+
+.main{
+    background: -webkit-linear-gradient(to bottom, #799f0c, #acbb78); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #799f0c, #acbb78);
+    height:100vh ;
 }
-
 .container1 h1{
     text-align: center;
     text-transform: capitalize;
@@ -29,18 +38,19 @@
     align-items: center;
     justify-content: center;
     padding: 10px; /* Ajusta el espacio interno del botón */
-    background-color: rgb(255, 255, 255); /* Color de fondo */
-    color: #333; /* Color del texto */
-    border: none; /* Sin bordes */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de la fuente */
+    background-color: transparent;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    color: #333; 
+    border: none;
+    border-radius: 5px; 
+    font-size: 16px; 
     cursor: pointer; 
     transition: background-color 0.3s ease, color 0.3s ease; 
     width: 150px;
   }
   
   .buttonSocial:hover {
-    background-color: rgb(148, 222, 228); /* Color de fondo al pasar el ratón */
+    background-color: rgb(148, 222, 228);
     color: #000; /* Color del texto al pasar el ratón */
   }
   
@@ -70,11 +80,12 @@
 
 .buttonsContainer{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     text-align: center;
     width: 80%;
     align-items: flex-end;
     height: 30px;
+
 
 
 }
@@ -84,12 +95,14 @@
     background-color: #090a09;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px;
     margin: 0 10px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 100%;
+    width: 80%;
+    border-radius: 40px;
+    font-size: 17px;
 }
 
 
@@ -148,3 +161,18 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
+
+.buttonD{
+    background-color: #090a09;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+
+    font-size: 14px;
+}
+

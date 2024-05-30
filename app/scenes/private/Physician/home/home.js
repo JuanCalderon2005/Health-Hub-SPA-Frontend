@@ -69,22 +69,24 @@ export function HomeScene() {
         </div>
 
         <div class="${styles['right-container-doctor']}">
-          <div class="${styles['forum-container']}">
-            <div class="${styles['create-post-container']}">
-              <div class="${styles['create-post-header']}">
-                <p class="${styles['text']}">Create New Subject</p>
-              </div>
-              <div class="${styles['create-post-body']}">
-                <div class="${styles['input-container']}">
-                  <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
-                  <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
-                  <button class="${styles['boton-send']}" id="createTopicButton">Send</button>
-                </div>
-              </div>
+        <div class="${styles['create-post-container']}">
+        <div class="${styles['create-post-header']}">
+          <h3 class="${styles['text']}">Create New Subject</h3>
+        </div>
+        <div class="${styles['create-post-body']}">
+          <div class="${styles['input-container']}">
+            <input class="${styles.texForo}" id="topicTitleInput" type="text" placeholder="Subject" required />
+            <textarea class="${styles.texForo1}" id="topicMessageInput" placeholder="Message" required></textarea>
+            <div class="${styles['container-button']}">
+              <button class="${styles['boton-publish']}" id="createTopicButton">Publish</button>
             </div>
-            <div class="${styles['topicArea']}" id="topicDisplayArea">
-            </div>
+            
           </div>
+        </div>
+      </div>
+      <div class="${styles['topicArea']}" id="topicDisplayArea">
+      </div>
+    </div>
         </div>
       </section>
         

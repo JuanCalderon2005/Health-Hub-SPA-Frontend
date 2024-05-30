@@ -6,7 +6,7 @@ export async function RegisterFormComponent() {
   const d = document;
   const root = d.getElementById("root");
   root.innerHTML = `
-  <body>
+  <div class="${style.main}">
   <div class="${style.container1}">
           <h1>create account</h1>
           <div class="${style.buttonsContainer}">
@@ -26,6 +26,7 @@ export async function RegisterFormComponent() {
             <box-icon type='logo' name='twitter'></box-icon>
             <a href="#" class="${style.facebookButton}">Twitter</a>
           </div>
+
   </div>
 
   <dialog id="patientInfo" class="${style.dialogContainer}">
@@ -37,8 +38,8 @@ export async function RegisterFormComponent() {
               <input type="number" id="patientRoleId" placeholder="Role ID" class="${style.input}" value="1" hidden>
           </section>
           <section class="${style.buttonSection}">
-              <button type="button" id="registerPatientSubmit" class="${style.button}">Register</button>
-              <button type="button" id="closePatientInfo" class="${style.button}">Close</button>
+              <button type="button" id="registerPatientSubmit" class="${style.buttonD}">Register</button>
+              <button type="button" id="closePatientInfo" class="${style.buttonD}">Close</button>
               <a href="#" class="${style.googleButton}">Register with Google</a>
           </section>
       </form>
@@ -53,12 +54,13 @@ export async function RegisterFormComponent() {
               <input type="number" id="physicianRoleId" placeholder="Role ID" class="${style.input}" value="2" hidden>
           </section>
           <section class="${style.buttonSection}">
-              <button type="button" id="registerPhysicianSubmit" class="${style.button}">Register</button>
-              <button type="button" id="closePhysicianInfo" class="${style.button}">Close</button>
+              <button type="button" id="registerPhysicianSubmit" class="${style.buttonD}">Register</button>
+              <button type="button" id="closePhysicianInfo" class="${style.buttonD}">Close</button>
               <a href="#" class="${style.googleButton}">Register with Google</a>
           </section>
       </form>
   </dialog>
+  </div>
   `;
 
   const patientInfo = d.getElementById("patientInfo");
@@ -94,38 +96,34 @@ export async function RegisterFormComponent() {
     console.log({ rol_id })
     try {
       const response = await fetch("http://localhost:3000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password, rol_id }),
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password, rol_id }),
       });
-
+  
+      console.log("Response:", response); 
+  
       const data = await response.json();
-
+  
       console.log("Response data:", data);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      if (data.exists) {
-        alert("User already exists");
-      } else if (data.success) {
-        alert("Registration successful");
-        closeDialog(d.getElementById(`${role}Info`));
-        setTimeout(() => {
-          navigateTo("/login");
-        }, 2000);
+  
+      if (data && data.name && data.email && data.password) {
+          // Verificar si el usuario se ha registrado correctamente
+          alert("Registration successful");
+          closeDialog(d.getElementById(`${role}Info`));
+          setTimeout(() => {
+              navigateTo("/login");
+          }, 2000);
       } else {
-        alert("Registration failed. Please try again.");
+          alert("Registration failed. Please try again.");
       }
-
-    } catch (error) {
+  } catch (error) {
       console.error("Error:", error);
       alert("An error occurred. Please try again later.");
-    }
   }
+ }
 
   d.getElementById("registerPatientSubmit").addEventListener("click", () => handleRegister("patient"));
   d.getElementById("registerPhysicianSubmit").addEventListener("click", () => handleRegister("physician"));
